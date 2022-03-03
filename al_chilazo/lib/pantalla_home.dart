@@ -1,3 +1,4 @@
+import 'package:al_chilazo/pantalla_prueba.dart';
 import 'package:flutter/material.dart';
 import './trabajadores.dart';
 
@@ -57,7 +58,10 @@ class _HomePage extends State<HomePage> {
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
             child: Text('Ofrecer Servicio'),
-            onPressed: null,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => pantalla_prueba()));
+            },
           ),
           //muestra todos las personas disponibles que ofrecen servicios
           Trabajadores(
