@@ -8,6 +8,7 @@ class pantalla_prueba extends StatelessWidget {
         title: Text(
           'nueva pagina',
         ),
+        backgroundColor: Color.fromARGB(249, 11, 236, 112),
       ),
       body: Center(
         child: Text(
