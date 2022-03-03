@@ -16,6 +16,9 @@ class _HomePage extends State<HomePage> {
     'Jorge Caballeros',
     'Yong Park',
     'Santiago Taracena',
+    'Jorge Antonio',
+    'Maria Luisa',
+    'Estefani Gutierrez',
   ];
   var i = 0;
   //metodo para que muestre el siguiete de la lista de los trabajadores
