@@ -19,6 +19,7 @@ class _HomePage extends State<HomePage> {
     'Jorge Antonio',
     'Maria Luisa',
     'Estefani Gutierrez',
+    'Carlos Agustin',
   ];
   var i = 0;
   //metodo para que muestre el siguiete de la lista de los trabajadores
@@ -39,7 +40,7 @@ class _HomePage extends State<HomePage> {
   void anterior() {
     if (i < 1) {
       setState(() {
-        i = 3;
+        i = personal_servicio.length - 3;
       });
     } else {
       setState(() {
@@ -89,7 +90,10 @@ class _HomePage extends State<HomePage> {
           //boton para buscar servicios
           ElevatedButton(
             child: Text('Servicios'),
-            onPressed: null,
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => pantalla_prueba()));
+            },
           ),
         ],
       ),
