@@ -1,7 +1,7 @@
-import 'dart:io';
 import 'package:al_chilazo/pantalla_prueba.dart';
 import 'package:flutter/material.dart';
 import './trabajadores.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 class HomePage extends StatefulWidget {
   @override
@@ -10,7 +10,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   //variable global.
+  String textFromFiel = 'hola';
   //crearndo para la lectura de base de datos o archivo .txt
+  getData() async {
+    String response;
+    response = await rootBundle.loadString('database/trabajadores.txt');
+    setState(() {
+      textFromFiel = response;
+    });
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
 
   //lista con nombres
   List<String> personal_servicio = [
@@ -72,6 +86,9 @@ class _HomePage extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => pantalla_prueba()));
             },
           ),
+          Text(
+            textFromFiel,
+          ),
           Divider(
             color: Colors.black,
           ),
@@ -92,6 +109,7 @@ class _HomePage extends State<HomePage> {
           ElevatedButton(
             child: Text('Siguiente'),
             onPressed: siguiente,
+            onLongPress: getData,
           ),
           //boton para ver anteriores trabajadores
           ElevatedButton(
