@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:al_chilazo/pantalla_prueba.dart';
 import 'package:flutter/material.dart';
 import './trabajadores.dart';
@@ -9,7 +10,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   //variable global.
-  var personal_servicio = [
+  //crearndo para la lectura de base de datos o archivo .txt
+
+  //lista con nombres
+  List<String> personal_servicio = [
     'Luis Gutierrez',
     'Pedro Pablo',
     'Oscar Fernando',
@@ -21,6 +25,7 @@ class _HomePage extends State<HomePage> {
     'Estefani Gutierrez',
     'Carlos Agustin',
   ];
+
   var i = 0;
   //metodo para que muestre el siguiete de la lista de los trabajadores
   void siguiente() {
@@ -67,6 +72,9 @@ class _HomePage extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => pantalla_prueba()));
             },
           ),
+          Divider(
+            color: Colors.black,
+          ),
           //muestra todos las personas disponibles que ofrecen servicios
           Trabajadores(
             personal_servicio[i],
@@ -77,6 +85,9 @@ class _HomePage extends State<HomePage> {
           Trabajadores(
             personal_servicio[i + 2],
           ),
+          Divider(
+            color: Colors.black,
+          ),
           //boton para ver siguientes trabajadores
           ElevatedButton(
             child: Text('Siguiente'),
@@ -86,6 +97,9 @@ class _HomePage extends State<HomePage> {
           ElevatedButton(
             child: Text('Anterior'),
             onPressed: anterior,
+          ),
+          Divider(
+            color: Colors.black,
           ),
           //boton para buscar servicios
           ElevatedButton(
