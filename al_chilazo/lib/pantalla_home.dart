@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   //lista con nombres
-  final List<String> personal_servicio = <String>[
+  List<String> personal_servicio = <String>[
     'Luis Gutierrez',
     'Pedro Pablo',
     'Oscar Fernando',
@@ -74,16 +74,19 @@ class _HomePage extends State<HomePage> {
             'Trabajadores existentes',
             textScaleFactor: 1.5,
           ),
-          ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: personal_servicio.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                child: Center(child: Text('Entry ${personal_servicio[index]}')),
-              );
-            },
+          Container(
+            height: 60,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: personal_servicio.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: Text(personal_servicio[index]),
+                );
+              },
+            ),
           ),
+
           //muestra todos las personas disponibles que ofrecen servicios
           /*Trabajadores(
             personal_servicio[i],
