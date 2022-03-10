@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import './trabajadores.dart';
 import './pantalla_home.dart';
 
 void main() => runApp(MyApp());

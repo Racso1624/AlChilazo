@@ -19,36 +19,10 @@ class _HomePage extends State<HomePage> {
     'Maria Luisa',
     'Estefani Gutierrez',
     'Carlos Agustin',
+    'Esteban Kirstin',
+    'Rodrigo Barrera',
+    'Marco Antonio',
   ];
-
-  var i = 0;
-  //metodo para que muestre el siguiete de la lista de los trabajadores
-  void siguiente() {
-    if (i > (personal_servicio.length - 4)) {
-      setState(() {
-        i = 0;
-      });
-    } else {
-      setState(() {
-        i = i + 1;
-      });
-    }
-    print(i);
-  }
-
-  //metodo para que muestre el anterior de la lista de los trabajadores
-  void anterior() {
-    if (i < 1) {
-      setState(() {
-        i = personal_servicio.length - 3;
-      });
-    } else {
-      setState(() {
-        i = i - 1;
-      });
-    }
-    print(i);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,45 +44,27 @@ class _HomePage extends State<HomePage> {
           Divider(
             color: Colors.black,
           ),
+          //muestra todos las personas disponibles que ofrecen servicios
           Text(
             'Trabajadores existentes',
-            textScaleFactor: 1.5,
+            style: TextStyle(
+              fontSize: 25,
+              backgroundColor: Colors.grey,
+            ),
           ),
           Container(
-            height: 60,
-            child: ListView.builder(
+            height: 90,
+            child: ListView.separated(
               shrinkWrap: true,
               itemCount: personal_servicio.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  child: Text(personal_servicio[index]),
+                  child: Center(child: Text(personal_servicio[index])),
                 );
               },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
             ),
-          ),
-
-          //muestra todos las personas disponibles que ofrecen servicios
-          /*Trabajadores(
-            personal_servicio[i],
-          ),
-          Trabajadores(
-            personal_servicio[i + 1],
-          ),
-          Trabajadores(
-            personal_servicio[i + 2],
-          ),*/
-          Divider(
-            color: Colors.black,
-          ),
-          //boton para ver siguientes trabajadores
-          ElevatedButton(
-            child: Text('Siguiente'),
-            onPressed: siguiente,
-          ),
-          //boton para ver anteriores trabajadores
-          ElevatedButton(
-            child: Text('Anterior'),
-            onPressed: anterior,
           ),
           Divider(
             color: Colors.black,
