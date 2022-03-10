@@ -1,7 +1,5 @@
 import 'package:al_chilazo/pantalla_prueba.dart';
 import 'package:flutter/material.dart';
-import './trabajadores.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,25 +7,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
-  //variable global.
-  String textFromFiel = 'hola';
-  //crearndo para la lectura de base de datos o archivo .txt
-  getData() async {
-    String response;
-    response = await rootBundle.loadString('database/trabajadores.txt');
-    setState(() {
-      textFromFiel = response;
-    });
-  }
-
-  @override
-  void initState() {
-    getData();
-    super.initState();
-  }
-
   //lista con nombres
-  List<String> personal_servicio = [
+  final List<String> personal_servicio = <String>[
     'Luis Gutierrez',
     'Pedro Pablo',
     'Oscar Fernando',
@@ -86,14 +67,25 @@ class _HomePage extends State<HomePage> {
                   MaterialPageRoute(builder: (context) => pantalla_prueba()));
             },
           ),
-          Text(
-            textFromFiel,
-          ),
           Divider(
             color: Colors.black,
           ),
+          Text(
+            'Trabajadores existentes',
+            textScaleFactor: 1.5,
+          ),
+          ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: personal_servicio.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                height: 50,
+                child: Center(child: Text('Entry ${personal_servicio[index]}')),
+              );
+            },
+          ),
           //muestra todos las personas disponibles que ofrecen servicios
-          Trabajadores(
+          /*Trabajadores(
             personal_servicio[i],
           ),
           Trabajadores(
@@ -101,7 +93,7 @@ class _HomePage extends State<HomePage> {
           ),
           Trabajadores(
             personal_servicio[i + 2],
-          ),
+          ),*/
           Divider(
             color: Colors.black,
           ),
@@ -109,7 +101,6 @@ class _HomePage extends State<HomePage> {
           ElevatedButton(
             child: Text('Siguiente'),
             onPressed: siguiente,
-            onLongPress: getData,
           ),
           //boton para ver anteriores trabajadores
           ElevatedButton(
