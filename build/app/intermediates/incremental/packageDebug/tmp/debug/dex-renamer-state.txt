@@ -1,0 +1,4 @@
+#Thu Mar 10 22:33:28 CST 2022
+base.0=C\:\\Users\\Pedro\\Documents\\development\\projects\\register_alchilazo\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
