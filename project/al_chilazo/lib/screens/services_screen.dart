@@ -151,6 +151,7 @@ class PromoCard extends StatelessWidget {
             gradient: const LinearGradient(
                 colors: [Color(0xff53E88B), Color(0xff15BE77)])),
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Image.network(
                 "https://cdn.create.vista.com/api/media/medium/310711716/stock-photo-middle-aged-constructor-holding-hammer?token="),
