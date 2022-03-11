@@ -1,4 +1,4 @@
-import 'package:alchilazo/pantalla_prueba.dart';
+import 'package:alchilazo/register_worker.dart';
 import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +39,7 @@ class _HomePage extends State<HomePage> {
             child: Text('Ofrecer Servicio'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => pantalla_prueba()));
+                  MaterialPageRoute(builder: (context) => RegisterWorker()));
             },
           ),
           Divider(
