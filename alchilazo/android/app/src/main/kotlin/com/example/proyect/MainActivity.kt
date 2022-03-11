@@ -1,4 +1,4 @@
-package com.example.alchilazo
+package com.example.proyect
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(alchilazo LANGUAGES CXX)
+project(proyect LANGUAGES CXX)
 
-set(BINARY_NAME "alchilazo")
+set(BINARY_NAME "proyect")
 
 cmake_policy(SET CMP0063 NEW)
 
