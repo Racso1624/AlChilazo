@@ -19,6 +19,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
             children: const [
               TopBar(),
               SearchInput(),
+              HeadlineRecommendation(),
               PromoCard(),
               Headline(),
               CardListView(),
@@ -102,6 +103,34 @@ class SearchInput extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class HeadlineRecommendation extends StatelessWidget {
+  const HeadlineRecommendation({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 25.0, right: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                "Servicios Disponibles",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
