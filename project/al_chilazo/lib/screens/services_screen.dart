@@ -146,10 +146,6 @@ class PromoCard extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 150,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-                colors: [Color(0xff53E88B), Color(0xff15BE77)])),
         child: Stack(
           alignment: Alignment.center,
           children: [
