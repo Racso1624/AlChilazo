@@ -126,7 +126,7 @@ class PromoCard extends StatelessWidget {
             Image.network(
                 "https://cdn.create.vista.com/api/media/medium/310711716/stock-photo-middle-aged-constructor-holding-hammer?token="),
             const Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.center,
               child: Padding(
                 padding: EdgeInsets.all(25.0),
                 child: Text(
@@ -182,9 +182,9 @@ class CardListView extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25.0, right: 25.0, bottom: 15.0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: 175,
+        height: 300,
         child: ListView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           children: [
             Card(
                 "Electricista",
