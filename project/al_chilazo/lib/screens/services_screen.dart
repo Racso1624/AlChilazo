@@ -122,7 +122,7 @@ class HeadlineRecommendation extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                "Servicios Disponibles",
+                "Algunas Recomendaciones",
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 18,
@@ -154,19 +154,6 @@ class PromoCard extends StatelessWidget {
           children: [
             Image.network(
                 "https://cdn.create.vista.com/api/media/medium/310711716/stock-photo-middle-aged-constructor-holding-hammer?token="),
-            const Align(
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.all(25.0),
-                child: Text(
-                  "Algunas Recomendaciones",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
           ],
         ),
       ),
