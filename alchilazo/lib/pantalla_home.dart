@@ -1,4 +1,5 @@
 import 'package:alchilazo/pantalla_prueba.dart';
+import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -74,7 +75,7 @@ class _HomePage extends State<HomePage> {
             child: Text('Servicios'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => pantalla_prueba()));
+                  MaterialPageRoute(builder: (context) => ServicesScreen()));
             },
           ),
         ],
