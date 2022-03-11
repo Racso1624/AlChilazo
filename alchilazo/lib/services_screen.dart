@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'contratar.dart';
 
 class ServicesScreen extends StatefulWidget {
   const ServicesScreen({Key? key}) : super(key: key);
@@ -14,18 +15,25 @@ class _ServicesScreenState extends State<ServicesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Al Chilazo"),
+        title: Text("Servicios"),
         backgroundColor: Color.fromARGB(225, 255, 4, 4),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
-            children: const [
-              TopBar(),
-              SearchInput(),
-              PromoCard(),
-              Headline(),
-              CardListView(),
+            children: [
+              const TopBar(),
+              const SearchInput(),
+              const HeadlineRecommendation(),
+              const PromoCard(),
+              const Headline(),
+              const CardListView(),
+              GradientButtonFb4(
+                  text: "Buscar",
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) => Contratar())));
+                  })
             ],
           ),
         ),
@@ -111,6 +119,34 @@ class SearchInput extends StatelessWidget {
   }
 }
 
+class HeadlineRecommendation extends StatelessWidget {
+  const HeadlineRecommendation({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(left: 25.0, right: 25.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: const [
+              Text(
+                "Algunas Recomendaciones",
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.normal),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class PromoCard extends StatelessWidget {
   const PromoCard({Key? key}) : super(key: key);
 
@@ -121,27 +157,11 @@ class PromoCard extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 150,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: const LinearGradient(
-                colors: [Color(0xff53E88B), Color(0xff15BE77)])),
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Image.network(
                 "https://cdn.create.vista.com/api/media/medium/310711716/stock-photo-middle-aged-constructor-holding-hammer?token="),
-            const Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: EdgeInsets.all(25.0),
-                child: Text(
-                  "Algunas Recomendaciones",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
           ],
         ),
       ),
@@ -186,9 +206,9 @@ class CardListView extends StatelessWidget {
       padding: const EdgeInsets.only(top: 25.0, right: 25.0, bottom: 15.0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: 175,
+        height: 300,
         child: ListView(
-          scrollDirection: Axis.horizontal,
+          scrollDirection: Axis.vertical,
           children: [
             Card(
                 "Electricista",
@@ -284,5 +304,41 @@ class Card extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class GradientButtonFb4 extends StatelessWidget {
+  final String text;
+  final Function() onPressed;
+
+  const GradientButtonFb4(
+      {required this.text, required this.onPressed, Key? key})
+      : super(key: key);
+
+  final double borderRadius = 25;
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(borderRadius),
+            gradient: const LinearGradient(
+                colors: [Color(0xff53E88B), Color(0xff15BE77)])),
+        child: ElevatedButton(
+            style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0),
+                alignment: Alignment.center,
+                padding: MaterialStateProperty.all(const EdgeInsets.only(
+                    right: 75, left: 75, top: 15, bottom: 15)),
+                backgroundColor: MaterialStateProperty.all(Colors.transparent),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(borderRadius)),
+                )),
+            onPressed: onPressed,
+            child: Text(
+              text,
+              style: const TextStyle(color: Colors.white),
+            )));
   }
 }
