@@ -14,7 +14,7 @@ class _Contratar extends State<Contratar> {
     return Scaffold(
       //Main widget
       appBar: AppBar(
-        title: Text('Ofrecer Servicios'),
+        title: Text('Contratar Trabajador'),
         centerTitle: true,
         backgroundColor: Colors.red,
       ),
@@ -30,7 +30,6 @@ class _Contratar extends State<Contratar> {
               fontWeight: FontWeight.bold,
             ),
           ),
-
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -78,32 +77,6 @@ class _Contratar extends State<Contratar> {
             ),
             child: Text(
                 '\nSoy un electricista profesional, me encanta mi trabajo. Tengo multiples años de experiencia en arreglar sistemas electricos e instalarlos.\n'),
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              '\nAntecedentes penales:\n',
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-          ),
-          //instalador-electricista-715x495
-          Image(
-            image: AssetImage('images/carencia-de-antecedentes.jpg'),
-            height: 100.0,
-            width: 200.0,
-          ),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(
-              '\nReferencias Personales:\n\nTeléfono: +502 4658-4657\nNombre:   Marco Orozco\nOficio:       Electricista',
-              style: TextStyle(
-                fontSize: 17.0,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
           ),
           Align(
             alignment: Alignment.topLeft,

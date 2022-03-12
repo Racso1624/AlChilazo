@@ -1,3 +1,4 @@
+import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/material.dart';
 
 class RegisterWorker extends StatefulWidget {
@@ -17,6 +18,8 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   TextEditingController password = TextEditingController();
   TextEditingController dpi = TextEditingController();
   TextEditingController postalCode = TextEditingController();
+  TextEditingController antecedente_penal = TextEditingController();
+  TextEditingController Descripcion = TextEditingController();
 
   List<Step> stepList() => [
         Step(
@@ -26,11 +29,14 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             title: const Text('Datos'),
             content: Column(
               children: [
-                TextField(
-                  controller: name,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Nombre completo'),
+                ElevatedButton(
+                  child: Text('Ofrecer Servicio'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ServicesScreen()));
+                  },
                 ),
                 const SizedBox(
                   height: 8,
@@ -54,19 +60,10 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
-                  controller: email,
+                  controller: Descripcion,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Correo Electrónico'),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                TextField(
-                  controller: password,
-                  obscureText: true,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'Contraseña'),
+                      labelText: 'Descripcion de si mismo'),
                 ),
                 const SizedBox(
                   height: 8,
@@ -88,6 +85,15 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 const SizedBox(
                   height: 8,
                 ),
+                TextField(
+                  controller: antecedente_penal,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Antecedentes Penales'),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
               ],
             )),
         Step(
@@ -99,12 +105,11 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text('Nombre completo: ${name.text}'),
                   Text('Dirección Fiscal: ${address.text}'),
                   Text('Número telefónico: ${phone.text}'),
-                  Text('Correo Electrónico: ${email.text}'),
-                  const Text('Contraseña: ******'),
-                  Text('DPI: ${dpi.text}')
+                  Text('Descripcion: ${Descripcion.text}'),
+                  Text('DPI: ${dpi.text}'),
+                  Text('Antecedente penales: ${antecedente_penal.text}'),
                 ],
               ),
             ))
