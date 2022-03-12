@@ -15,7 +15,7 @@ class _IngresoState extends State<Ingreso> {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Ingreso"),
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Colors.red,
       ),
       body: Center(
         child: Column(

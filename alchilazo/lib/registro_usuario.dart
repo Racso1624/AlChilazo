@@ -15,7 +15,7 @@ class _RegistroState extends State<Registro> {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Registro"),
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Colors.red,
       ),
       body: Center(
         child: Column(

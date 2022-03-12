@@ -114,9 +114,11 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Center(
-        child: Text('Registro Trabajador'),
-      )),
+        title: const Center(
+          child: Text('Registro Trabajador'),
+        ),
+        backgroundColor: Colors.red,
+      ),
       body: Stepper(
         type: StepperType.horizontal,
         currentStep: _activeStepIndex,
