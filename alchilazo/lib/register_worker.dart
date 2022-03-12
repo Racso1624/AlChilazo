@@ -20,6 +20,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   TextEditingController postalCode = TextEditingController();
   TextEditingController antecedente_penal = TextEditingController();
   TextEditingController Descripcion = TextEditingController();
+  TextEditingController foto_perfil = TextEditingController();
 
   List<Step> stepList() => [
         Step(
@@ -78,9 +79,9 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             content: Column(
               children: [
                 TextField(
-                  controller: dpi,
+                  controller: foto_perfil,
                   decoration: const InputDecoration(
-                      border: OutlineInputBorder(), labelText: 'DPI'),
+                      border: OutlineInputBorder(), labelText: 'Foto perfil'),
                 ),
                 const SizedBox(
                   height: 8,
@@ -108,7 +109,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   Text('Dirección Fiscal: ${address.text}'),
                   Text('Número telefónico: ${phone.text}'),
                   Text('Descripcion: ${Descripcion.text}'),
-                  Text('DPI: ${dpi.text}'),
+                  Text('foto_perfil: ${foto_perfil.text}'),
                   Text('Antecedente penales: ${antecedente_penal.text}'),
                 ],
               ),
