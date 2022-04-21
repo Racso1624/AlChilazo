@@ -1,5 +1,8 @@
 import 'package:alchilazo/pantalla_home.dart';
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
+import 'package:alchilazo/mongo.dart';
+import 'MongoDbModel.dart';
 
 class Registro extends StatefulWidget {
   static String id = 'registro_usuario';
@@ -10,10 +13,10 @@ class Registro extends StatefulWidget {
 
 class _RegistroState extends State<Registro> {
   //uso para obtener los datos ingreados para subirlo luego a la base de datos
-  final name = TextEditingController();
-  final email = TextEditingController();
-  final pass = TextEditingController();
-  final dpi = TextEditingController();
+  var name = new TextEditingController();
+  var email = new TextEditingController();
+  var pass = new TextEditingController();
+  var dpi = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -50,6 +53,17 @@ class _RegistroState extends State<Registro> {
         ),
       ),
     ));
+  }
+
+  Future<void> _insertData(
+      String name, String email, String pass, String dpi) async {
+    var _id = M.ObjectId();
+    final data = MongoDbModel(
+        id: _id, nombre: name, correo: email, password: pass, dpi: dpi);
+    var result = await MongoDatabase.insert(data);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("ISERTED ID " + _id.$oid)));
+    _clearAll();
   }
 
   Widget _nameTextField() {
@@ -142,6 +156,7 @@ class _RegistroState extends State<Registro> {
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         onPressed: () {
+          _insertData(name.text, email.text, pass.text, dpi.text);
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -155,5 +170,12 @@ class _RegistroState extends State<Registro> {
         },
       );
     });
+  }
+
+  void _clearAll() {
+    name.text = '';
+    email.text = '';
+    pass.text = '';
+    dpi.text = '';
   }
 }
