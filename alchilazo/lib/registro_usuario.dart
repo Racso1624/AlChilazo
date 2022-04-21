@@ -2,7 +2,7 @@ import 'package:alchilazo/pantalla_home.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:alchilazo/mongo.dart';
-import 'MongoDbModel.dart';
+import 'MongoDbModel_User.dart';
 
 class Registro extends StatefulWidget {
   static String id = 'registro_usuario';
@@ -58,7 +58,7 @@ class _RegistroState extends State<Registro> {
   Future<void> _insertData(
       String name, String email, String pass, String dpi) async {
     var _id = M.ObjectId();
-    final data = MongoDbModel(
+    final data = MongoDbModel_User(
         id: _id, nombre: name, correo: email, password: pass, dpi: dpi);
     var result = await MongoDatabase.insert_usuario(data);
     ScaffoldMessenger.of(context)

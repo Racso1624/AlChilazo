@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:mongo_dart/mongo_dart.dart';
 
-MongoDbModel mongoDbModelFromJson(String str) =>
-    MongoDbModel.fromJson(json.decode(str));
+MongoDbModel_User mongoDbModel_UserToFromJson(String str) =>
+    MongoDbModel_User.fromJson(json.decode(str));
 
-String mongoDbModelToJson(MongoDbModel data) => json.encode(data.toJson());
+String mongoDbModel_UserToJson(MongoDbModel_User data) =>
+    json.encode(data.toJson());
 
-class MongoDbModel {
-  MongoDbModel({
+class MongoDbModel_User {
+  MongoDbModel_User({
     required this.id,
     required this.nombre,
     required this.correo,
@@ -21,7 +22,8 @@ class MongoDbModel {
   String password;
   String dpi;
 
-  factory MongoDbModel.fromJson(Map<String, dynamic> json) => MongoDbModel(
+  factory MongoDbModel_User.fromJson(Map<String, dynamic> json) =>
+      MongoDbModel_User(
         id: json["_id"],
         nombre: json["nombre"],
         correo: json["correo"],

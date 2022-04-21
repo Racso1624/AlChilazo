@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:alchilazo/MongoDbModel.dart';
+import 'package:alchilazo/MongoDbModel_User.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
@@ -79,7 +79,7 @@ class _MondoDbInsertState extends State<MondoDbInsert> {
   Future<void> _insertData(
       String name, String email, String pass, String dpi) async {
     var _id = M.ObjectId();
-    final data = MongoDbModel(
+    final data = MongoDbModel_User(
         id: _id, nombre: name, correo: email, password: pass, dpi: dpi);
     var result = await MongoDatabase.insert_usuario(data);
     ScaffoldMessenger.of(context)
