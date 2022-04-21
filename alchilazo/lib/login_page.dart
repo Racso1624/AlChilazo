@@ -1,6 +1,5 @@
 import 'package:alchilazo/registro_usuario.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'ingreso_sesion.dart';
 
 class LoginPage extends StatefulWidget {

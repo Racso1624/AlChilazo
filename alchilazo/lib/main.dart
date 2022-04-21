@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
+import 'package:alchilazo/mongo.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await MongoDatabase.connect();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override

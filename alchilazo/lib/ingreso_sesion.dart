@@ -9,6 +9,9 @@ class Ingreso extends StatefulWidget {
 }
 
 class _IngresoState extends State<Ingreso> {
+  //uso para obtener los datos ingreados para subirlo luego a la base de datos
+  final name = TextEditingController();
+  final pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,6 +50,7 @@ class _IngresoState extends State<Ingreso> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
+          controller: name,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             icon: Icon(Icons.email),
@@ -66,6 +70,7 @@ class _IngresoState extends State<Ingreso> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: TextField(
+          controller: pass,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
@@ -82,8 +87,8 @@ class _IngresoState extends State<Ingreso> {
 
   Widget _buttonLogin() {
     return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return RaisedButton(
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        return RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
             child: Text('Ingresar'),
@@ -93,7 +98,11 @@ class _IngresoState extends State<Ingreso> {
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => HomePage()));
-          });
-    });
+            print(name.text);
+            print(pass.text);
+          },
+        );
+      },
+    );
   }
 }
