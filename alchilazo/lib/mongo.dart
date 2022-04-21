@@ -12,7 +12,7 @@ class MongoDatabase {
     userCollection = db.collection(USER_COLLECTION);
   }
 
-  static Future<String> insert(MongoDbModel data) async {
+  static Future<String> insert_usuario(MongoDbModel data) async {
     try {
       var result = await userCollection.insertOne(data.toJson());
       if (result.isSuccess) {

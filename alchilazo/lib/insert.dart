@@ -81,7 +81,7 @@ class _MondoDbInsertState extends State<MondoDbInsert> {
     var _id = M.ObjectId();
     final data = MongoDbModel(
         id: _id, nombre: name, correo: email, password: pass, dpi: dpi);
-    var result = await MongoDatabase.insert(data);
+    var result = await MongoDatabase.insert_usuario(data);
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("ISERTED ID " + _id.$oid)));
     _clearAll();
