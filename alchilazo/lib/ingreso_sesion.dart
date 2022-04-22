@@ -1,3 +1,4 @@
+import 'package:alchilazo/mongo.dart';
 import 'package:alchilazo/pantalla_home.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,14 @@ class Ingreso extends StatefulWidget {
 
 class _IngresoState extends State<Ingreso> {
   //uso para obtener los datos ingreados para subirlo luego a la base de datos
-  final name = TextEditingController();
-  final pass = TextEditingController();
+  var name = TextEditingController();
+  var pass = TextEditingController();
+  var arrData = [];
+
+  Future _getData() async {
+    arrData = await MongoDatabase.getData_users();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -96,10 +103,23 @@ class _IngresoState extends State<Ingreso> {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => HomePage()));
+            _getData();
             print(name.text);
             print(pass.text);
+            for (var x = 0; x < arrData.length; x++) {
+              if (name.text == arrData[x]['correo'].toString() &&
+                  pass.text == arrData[x]['password'].toString()) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+                break;
+              } else {
+                print('Error el correo o pass esta incorrecto');
+                //print(arrData[x]['correo']);
+                //print(arrData[x]['password']);
+              }
+            }
+
+            //print('datassss: ' + arrData.toString());
           },
         );
       },
