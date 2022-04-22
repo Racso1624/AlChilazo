@@ -19,7 +19,7 @@ class MongoDatabase {
       if (result.isSuccess) {
         return "Data insertada";
       } else {
-        return "algo ocurrio";
+        return "Algo ocurrio";
       }
     } catch (e) {
       print(e.toString());

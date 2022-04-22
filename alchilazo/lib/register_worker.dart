@@ -16,10 +16,10 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   TextEditingController phone = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
-  TextEditingController dpi = TextEditingController();
   TextEditingController postalCode = TextEditingController();
+  TextEditingController descripcion = TextEditingController();
+  TextEditingController foto_dpi = TextEditingController();
   TextEditingController antecedente_penal = TextEditingController();
-  TextEditingController Descripcion = TextEditingController();
   TextEditingController foto_perfil = TextEditingController();
 
   List<Step> stepList() => [
@@ -30,15 +30,6 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             title: const Text('Datos'),
             content: Column(
               children: [
-                ElevatedButton(
-                  child: Text('Ofrecer Servicio'),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ServicesScreen()));
-                  },
-                ),
                 const SizedBox(
                   height: 8,
                 ),
@@ -61,10 +52,10 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
-                  controller: Descripcion,
+                  controller: descripcion,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Descripcion de si mismo'),
+                      labelText: 'Descripcion del Trabajo que Realiza'),
                 ),
                 const SizedBox(
                   height: 8,
@@ -75,7 +66,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             state:
                 _activeStepIndex <= 1 ? StepState.editing : StepState.complete,
             isActive: _activeStepIndex >= 1,
-            title: const Text('Documentos'),
+            title: const Text('Subir Documentos'),
             content: Column(
               children: [
                 TextField(
@@ -90,7 +81,15 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   controller: antecedente_penal,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Antecedentes Penales'),
+                      labelText: ' Foto Antecedentes Penales'),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  controller: foto_dpi,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), labelText: 'Foto DPI'),
                 ),
                 const SizedBox(
                   height: 8,
@@ -108,9 +107,10 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 children: [
                   Text('Dirección Fiscal: ${address.text}'),
                   Text('Número telefónico: ${phone.text}'),
-                  Text('Descripcion: ${Descripcion.text}'),
-                  Text('foto_perfil: ${foto_perfil.text}'),
-                  Text('Antecedente penales: ${antecedente_penal.text}'),
+                  Text('Descripcion: ${descripcion.text}'),
+                  Text('Foto_perfil: ${foto_perfil.text}'),
+                  Text('Foto Antecedente penales: ${antecedente_penal.text}'),
+                  Text('Foto DPI: ${foto_dpi}')
                 ],
               ),
             ))
