@@ -110,7 +110,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   Text('Descripcion: ${descripcion.text}'),
                   Text('Foto_perfil: ${foto_perfil.text}'),
                   Text('Foto Antecedente penales: ${antecedente_penal.text}'),
-                  Text('Foto DPI: ${foto_dpi}')
+                  Text('Foto DPI: ${foto_dpi.text}')
                 ],
               ),
             ))

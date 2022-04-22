@@ -82,7 +82,7 @@ class _IngresoState extends State<Ingreso> {
           obscureText: true,
           decoration: InputDecoration(
             icon: Icon(Icons.lock),
-            hintText: '123456',
+            hintText: 'password',
             labelText: 'Contraseña',
           ),
           //Variable que recibirá el correo
