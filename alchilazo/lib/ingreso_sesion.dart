@@ -109,8 +109,11 @@ class _IngresoState extends State<Ingreso> {
             for (var x = 0; x < arrData.length; x++) {
               if (name.text == arrData[x]['correo'].toString() &&
                   pass.text == arrData[x]['password'].toString()) {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomePage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            HomePage(name: arrData[x]['nombre'])));
                 break;
               } else {
                 print('Error el correo o pass esta incorrecto');
