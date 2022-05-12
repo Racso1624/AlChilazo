@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:alchilazo/MongoDbModel_User.dart';
+import 'package:alchilazo/MongoDbModel_Worker.dart';
 import 'package:alchilazo/constant.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
@@ -21,6 +22,20 @@ class MongoDatabase {
   static Future<String> insert_usuario(MongoDbModel_User data) async {
     try {
       var result = await userCollection.insertOne(data.toJson());
+      if (result.isSuccess) {
+        return "Data insertada";
+      } else {
+        return "Algo ocurrio";
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+
+  static Future<String> insert_worker(MongoDbModel_Worker data) async {
+    try {
+      var result = await workerCollection.insertOne(data.toJson());
       if (result.isSuccess) {
         return "Data insertada";
       } else {

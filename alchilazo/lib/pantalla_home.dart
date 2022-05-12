@@ -1,11 +1,14 @@
+import 'package:alchilazo/mongo.dart';
 import 'package:alchilazo/register_worker.dart';
 import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   @override
-  String name;
-  HomePage({required this.name});
+  State<HomePage> createState() => _HomePage();
+}
+
+class _HomePage extends State<HomePage> {
 
   //lista con nombres
   List<String> personal_servicio = <String>[
@@ -33,13 +36,12 @@ class HomePage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text('Nombre: ${name}'),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
             child: Text('Ofrecer Servicio'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterWorker()));
+                  MaterialPageRoute(builder: (context) => RegisterWorker(name: name)));
             },
           ),
           Divider(

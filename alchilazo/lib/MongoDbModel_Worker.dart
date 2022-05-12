@@ -13,8 +13,6 @@ class MongoDbModel_Worker {
     required this.address,
     required this.phone,
     required this.email,
-    required this.password,
-    required this.postalCode,
     required this.descripcion,
     required this.foto_dpi,
     required this.antecedente_penal,
@@ -26,8 +24,6 @@ class MongoDbModel_Worker {
   String address;
   String phone;
   String email;
-  String password;
-  String postalCode;
   String descripcion;
   String foto_dpi;
   String antecedente_penal;
@@ -39,8 +35,6 @@ class MongoDbModel_Worker {
         address: json["address"],
         phone: json["phone"],
         email: json["email"],
-        password: json["password"],
-        postalCode: json["postalCode"],
         descripcion: json["descripcion"],
         foto_dpi: json["foto_dpi"],
         antecedente_penal: json["antecedente_penal"],
@@ -53,8 +47,6 @@ class MongoDbModel_Worker {
         "address": address,
         "phone": phone,
         "email": email,
-        "password": password,
-        "postalCode": postalCode,
         "descripcion": descripcion,
         "foto_dpi": foto_dpi,
         "antecedente_penal": antecedente_penal,

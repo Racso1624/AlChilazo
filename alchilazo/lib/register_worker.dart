@@ -1,9 +1,12 @@
+import 'package:alchilazo/mongo.dart';
 import 'package:alchilazo/services_screen.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:flutter/material.dart';
+import 'MongoDbModel_Worker.dart';
 
 class RegisterWorker extends StatefulWidget {
-  const RegisterWorker({Key? key}) : super(key: key);
-
+  const RegisterWorker({Key? key, required this.name}) : super(key: key);
+  final String name;
   @override
   State<RegisterWorker> createState() => _MyRegisterWorkerState();
 }
@@ -11,16 +14,26 @@ class RegisterWorker extends StatefulWidget {
 class _MyRegisterWorkerState extends State<RegisterWorker> {
   int _activeStepIndex = 0;
 
-  TextEditingController name = TextEditingController();
-  TextEditingController address = TextEditingController();
-  TextEditingController phone = TextEditingController();
-  TextEditingController email = TextEditingController();
-  TextEditingController password = TextEditingController();
-  TextEditingController postalCode = TextEditingController();
-  TextEditingController descripcion = TextEditingController();
-  TextEditingController foto_dpi = TextEditingController();
-  TextEditingController antecedente_penal = TextEditingController();
-  TextEditingController foto_perfil = TextEditingController();
+  var address = TextEditingController();
+  var phone = TextEditingController();
+  var email = TextEditingController();
+  var descripcion = TextEditingController();
+  var foto_dpi = TextEditingController();
+  var antecedente_penal = TextEditingController();
+  var foto_perfil = TextEditingController();
+
+  Future<void> _insertData(
+  String name, String address, String phone, String email, String descripcion, 
+  String foto_dpi, String antecedente_penal, String foto_perfil,) async {
+    var _id = M.ObjectId();
+    final data = MongoDbModel_Worker( 
+      id: _id, name: name, address: address, phone: phone, email: email, descripcion: descripcion, 
+      foto_dpi: foto_dpi, antecedente_penal: antecedente_penal, foto_perfil: foto_perfil);
+    var result = await MongoDatabase.insert_worker(data);
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text("INSERTED ID " + _id.$oid)));
+    _clearAll();
+  }
 
   List<Step> stepList() => [
         Step(
@@ -133,6 +146,9 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
           if (_activeStepIndex < (stepList().length - 1)) {
             _activeStepIndex += 1;
           }
+          else{
+            _insertData(widget.name, address.text, phone.text, email.text, descripcion.text, foto_dpi.text, antecedente_penal.text, foto_perfil.text);
+          }
           setState(() {});
         },
         onStepCancel: () {
@@ -145,4 +161,15 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
       ),
     );
   }
+
+  void _clearAll() {
+    address.text = '';
+    phone.text = '';
+    email.text = '';
+    descripcion.text = '';
+    foto_dpi.text = '';
+    antecedente_penal.text = '';
+    foto_perfil.text = '';
+  }
+
 }
