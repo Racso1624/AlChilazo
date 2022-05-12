@@ -4,7 +4,9 @@ import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key, required this.name}): super(key: key);
   @override
+  final String name;
   State<HomePage> createState() => _HomePage();
 }
 
@@ -36,12 +38,13 @@ class _HomePage extends State<HomePage> {
       ),
       body: Column(
         children: [
+          Text("Bienvenido: ${widget.name}"),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
             child: Text('Ofrecer Servicio'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterWorker(name: name)));
+                  MaterialPageRoute(builder: (context) => RegisterWorker(name: widget.name)));
             },
           ),
           Divider(
