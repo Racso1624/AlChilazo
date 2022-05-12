@@ -113,16 +113,10 @@ class _IngresoState extends State<Ingreso> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            HomePage(name: arrData[x]['nombre'])));
+                            HomePage(name: arrData[x]['nombre'], correo: arrData[x]['correo'])));
                 break;
-              } else {
-                print('Error el correo o pass esta incorrecto');
-                //print(arrData[x]['correo']);
-                //print(arrData[x]['password']);
               }
             }
-
-            //print('datassss: ' + arrData.toString());
           },
         );
       },

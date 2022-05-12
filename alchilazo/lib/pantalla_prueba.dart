@@ -12,7 +12,7 @@ class pantalla_prueba extends StatelessWidget {
       ),
       body: Center(
         child: Text(
-          'Se cambio de pagina xd',
+          'Se cambio de pagina',
         ),
       ),
     );

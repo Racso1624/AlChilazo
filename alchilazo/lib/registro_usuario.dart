@@ -160,7 +160,7 @@ class _RegistroState extends State<Registro> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(name: name.text),
+              builder: (context) => HomePage(name: name.text, correo: email.text,),
             ),
           );
         },
