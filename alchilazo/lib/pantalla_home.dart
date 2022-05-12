@@ -2,12 +2,11 @@ import 'package:alchilazo/register_worker.dart';
 import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   @override
-  State<HomePage> createState() => _HomePage();
-}
+  String name;
+  HomePage({required this.name});
 
-class _HomePage extends State<HomePage> {
   //lista con nombres
   List<String> personal_servicio = <String>[
     'Luis Gutierrez',
@@ -34,6 +33,7 @@ class _HomePage extends State<HomePage> {
       ),
       body: Column(
         children: [
+          Text('Nombre: ${name}'),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
             child: Text('Ofrecer Servicio'),
