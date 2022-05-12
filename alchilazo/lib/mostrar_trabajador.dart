@@ -6,13 +6,14 @@ import 'mongo.dart';
 class ViewWorker extends StatefulWidget {
   const ViewWorker({Key? key, required this.trabajo,required this.trabajadores}) : super(key: key);
   final String trabajo;
-  final Future<List<dynamic>> trabajadores;
+  final List trabajadores;
 
   @override
   State<ViewWorker> createState() => _ServicesWorkers();
 }
 
 class _ServicesWorkers extends State<ViewWorker> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,29 +33,6 @@ class _ServicesWorkers extends State<ViewWorker> {
               fontSize: 25,
               backgroundColor: Colors.grey,
             ),
-          ),
-          Text('xd'),
-          Container(
-            height: 90,
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: 0,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: Center(child: Text('a')),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) =>
-                  const Divider(),
-            ),
-          ),
-          Divider(
-            color: Colors.black,
-          ),
-          //boton para buscar servicios
-          ElevatedButton(
-            child: Text('Servicios'),
-            onPressed: () {},
           ),
         ],
       ),

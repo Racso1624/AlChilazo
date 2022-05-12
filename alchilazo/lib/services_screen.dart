@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'contratar.dart';
 import 'package:alchilazo/mongo.dart';
 
+var trabajadores = [];
+
+Future _getData() async {
+  trabajadores = await MongoDatabase.getData_workers();
+}
 
 
 class ServicesScreen extends StatefulWidget {
@@ -260,20 +265,13 @@ class Card extends StatelessWidget {
 
   Card(this.text, this.imageUrl, this.subtitle, {Key? key}) : super(key: key);
 
-  Future <List> _getData() async {
-    var arrData = await MongoDatabase.getData_workers();
-
-    return arrData;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, bottom: 15),
       child: new InkWell(
         onTap: () {
-          var trabajadores=  _getData();
-          print(trabajadores);
+          _getData();
           Navigator.push(
               context,
               MaterialPageRoute(
