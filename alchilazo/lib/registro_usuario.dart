@@ -62,7 +62,7 @@ class _RegistroState extends State<Registro> {
         id: _id, nombre: name, correo: email, password: pass, dpi: dpi);
     var result = await MongoDatabase.insert_usuario(data);
     ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("ISERTED ID " + _id.$oid)));
+        .showSnackBar(SnackBar(content: Text("INSERTED ID " + _id.$oid)));
     _clearAll();
   }
 
@@ -160,13 +160,9 @@ class _RegistroState extends State<Registro> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(),
+              builder: (context) => HomePage(name: name.text),
             ),
           );
-          print(name.text);
-          print(email.text);
-          print(pass.text);
-          print(dpi.text);
         },
       );
     });
