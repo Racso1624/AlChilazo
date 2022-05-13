@@ -17,6 +17,15 @@ class _IngresoState extends State<Ingreso> {
 
   Future _getData() async {
     arrData = await MongoDatabase.getData_users();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _getData();
+    });
   }
 
   @override
@@ -25,7 +34,7 @@ class _IngresoState extends State<Ingreso> {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Ingreso"),
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: Center(
         child: Column(
@@ -112,17 +121,12 @@ class _IngresoState extends State<Ingreso> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(name: arrData[x]['nombre'])));
+                        builder: (context) => HomePage(
+                            name: arrData[x]['nombre'],
+                            correo: arrData[x]['correo'])));
                 break;
-              } else {
-                print('Error el correo o pass esta incorrecto');
-                //print(arrData[x]['correo']);
-                //print(arrData[x]['password']);
               }
             }
-
-            //print('datassss: ' + arrData.toString());
           },
         );
       },

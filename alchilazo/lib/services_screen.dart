@@ -1,5 +1,7 @@
+import 'package:alchilazo/mostrar_trabajador.dart';
 import 'package:flutter/material.dart';
 import 'contratar.dart';
+import 'package:alchilazo/mongo.dart';
 
 class ServicesScreen extends StatefulWidget {
   const ServicesScreen({Key? key}) : super(key: key);
@@ -16,7 +18,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Servicios"),
-        backgroundColor: Color.fromARGB(225, 255, 4, 4),
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -28,12 +30,6 @@ class _ServicesScreenState extends State<ServicesScreen> {
               const PromoCard(),
               const Headline(),
               const CardListView(),
-              GradientButtonFb4(
-                  text: "Buscar",
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: ((context) => Contratar())));
-                  })
             ],
           ),
         ),
@@ -260,85 +256,59 @@ class Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, bottom: 15),
-      child: Container(
-        width: 150,
-        height: 150,
-        padding: const EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.5),
-          boxShadow: [
-            BoxShadow(
-                offset: const Offset(10, 20),
-                blurRadius: 10,
-                spreadRadius: 0,
-                color: Colors.grey.withOpacity(.05)),
-          ],
-        ),
-        child: Column(
-          children: [
-            Image.network(imageUrl, height: 70, fit: BoxFit.cover),
-            Spacer(),
-            Text(text,
+      child: new InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: ((context) => ViewWorker(
+                        trabajo: text,
+                      ))));
+        },
+        child: Container(
+          width: 150,
+          height: 150,
+          padding: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.5),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(10, 20),
+                  blurRadius: 10,
+                  spreadRadius: 0,
+                  color: Colors.grey.withOpacity(.05)),
+            ],
+          ),
+          child: Column(
+            children: [
+              Image.network(imageUrl, height: 70, fit: BoxFit.cover),
+              Spacer(),
+              Text(text,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  )),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                subtitle,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                )),
-            SizedBox(
-              height: 5,
-            ),
-            Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-          ],
+                    color: Colors.grey,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
-}
-
-class GradientButtonFb4 extends StatelessWidget {
-  final String text;
-  final Function() onPressed;
-
-  const GradientButtonFb4(
-      {required this.text, required this.onPressed, Key? key})
-      : super(key: key);
-
-  final double borderRadius = 25;
-
-  @override
-  Widget build(BuildContext context) {
-    return DecoratedBox(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(borderRadius),
-            gradient: const LinearGradient(
-                colors: [Color(0xff53E88B), Color(0xff15BE77)])),
-        child: ElevatedButton(
-            style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0),
-                alignment: Alignment.center,
-                padding: MaterialStateProperty.all(const EdgeInsets.only(
-                    right: 75, left: 75, top: 15, bottom: 15)),
-                backgroundColor: MaterialStateProperty.all(Colors.transparent),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(borderRadius)),
-                )),
-            onPressed: onPressed,
-            child: Text(
-              text,
-              style: const TextStyle(color: Colors.white),
-            )));
   }
 }

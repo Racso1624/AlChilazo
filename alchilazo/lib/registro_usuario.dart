@@ -24,7 +24,7 @@ class _RegistroState extends State<Registro> {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Registro"),
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: Center(
         child: Column(
@@ -160,7 +160,10 @@ class _RegistroState extends State<Registro> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => HomePage(name: name.text),
+              builder: (context) => HomePage(
+                name: name.text,
+                correo: email.text,
+              ),
             ),
           );
         },
