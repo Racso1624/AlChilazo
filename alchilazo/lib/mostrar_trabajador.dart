@@ -109,7 +109,7 @@ class _ServicesWorkers extends State<ViewWorker> {
           context,
           MaterialPageRoute(
             builder: ((context) => Contratar(
-              info_trabajador: arrData[index]))));
+              info_trabajador: trabajadores[index]))));
       },
     );
   }
