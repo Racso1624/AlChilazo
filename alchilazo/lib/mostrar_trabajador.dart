@@ -1,3 +1,4 @@
+import 'package:alchilazo/contratar.dart';
 import 'package:alchilazo/register_worker.dart';
 import 'package:alchilazo/services_screen.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
@@ -103,7 +104,13 @@ class _ServicesWorkers extends State<ViewWorker> {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: ((context) => Contratar(
+              info_trabajador: arrData[index]))));
+      },
     );
   }
 }

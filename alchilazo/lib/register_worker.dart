@@ -256,7 +256,6 @@ class Card extends StatelessWidget {
           if (!lista_trabajos.contains(text)) {
             lista_trabajos.add(text);
           }
-          print(lista_trabajos);
         },
         child: Container(
           width: 150,
