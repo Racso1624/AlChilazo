@@ -15,21 +15,30 @@ class ViewWorker extends StatefulWidget {
 
 class _ServicesWorkers extends State<ViewWorker> {
   var arrData = [];
+  var trabajadores = [];
+
   Future _getData() async {
     arrData = await MongoDatabase.getData_workers();
     setState(() {});
+    for(int i = 0; i < arrData.length; i++){
+        for(int j = 0; j < arrData[i]["lista_trabajos"].length; j++){
+          if(arrData[i]["lista_trabajos"][j] == widget.trabajo){
+            trabajadores.add(arrData[i]);
+          }
+        }
+      }
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _getData();
     });
   }
 
   final String imageUrl =
-      "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+  "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +51,7 @@ class _ServicesWorkers extends State<ViewWorker> {
         backgroundColor: Colors.white,
         body: ListView.builder(
             padding: const EdgeInsets.all(5.5),
-            itemCount: arrData.length,
+            itemCount: trabajadores.length,
             itemBuilder: _itemBuilder),
         resizeToAvoidBottomInset: false,
       ),
@@ -70,7 +79,7 @@ class _ServicesWorkers extends State<ViewWorker> {
           children: [
             Image.network(imageUrl, height: 70, fit: BoxFit.cover),
             Spacer(),
-            Text("${arrData[index]["name"]}",
+            Text("${trabajadores[index]["name"]}",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.black,
@@ -81,7 +90,7 @@ class _ServicesWorkers extends State<ViewWorker> {
               height: 5,
             ),
             Text(
-              "${arrData[index]["phone"]}",
+              "${trabajadores[index]["phone"]}",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Colors.grey,

@@ -23,7 +23,7 @@ class _IngresoState extends State<Ingreso> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _getData();
     });
   }
