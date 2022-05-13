@@ -17,6 +17,15 @@ class _IngresoState extends State<Ingreso> {
 
   Future _getData() async {
     arrData = await MongoDatabase.getData_users();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _getData();
+    });
   }
 
   @override
@@ -112,8 +121,9 @@ class _IngresoState extends State<Ingreso> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            HomePage(name: arrData[x]['nombre'], correo: arrData[x]['correo'])));
+                        builder: (context) => HomePage(
+                            name: arrData[x]['nombre'],
+                            correo: arrData[x]['correo'])));
                 break;
               }
             }

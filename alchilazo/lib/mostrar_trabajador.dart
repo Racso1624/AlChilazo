@@ -13,7 +13,6 @@ class ViewWorker extends StatefulWidget {
 }
 
 class _ServicesWorkers extends State<ViewWorker> {
-
   var arrData = [];
 
   Future _getData() async {
@@ -24,7 +23,7 @@ class _ServicesWorkers extends State<ViewWorker> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       _getData();
     });
   }
