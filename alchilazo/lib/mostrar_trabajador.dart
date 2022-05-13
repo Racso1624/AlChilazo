@@ -35,12 +35,17 @@ class _ServicesWorkers extends State<ViewWorker> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Trabajadores"),
+          backgroundColor: Color.fromARGB(225, 255, 4, 4),
+        ),
         backgroundColor: Colors.white,
         body: ListView.builder(
           padding: const EdgeInsets.all(5.5),
           itemCount: arrData.length,
           itemBuilder: _itemBuilder
-        )
+        ),
+        resizeToAvoidBottomInset:false, 
       ),
     );
   }
@@ -50,16 +55,16 @@ class _ServicesWorkers extends State<ViewWorker> {
         child: Container(
           width: 150,
           height: 150,
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(5.0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12.5),
+            borderRadius: BorderRadius.circular(30),
             boxShadow: [
               BoxShadow(
                   offset: const Offset(10, 20),
                   blurRadius: 10,
-                  spreadRadius: 0,
-                  color: Colors.grey.withOpacity(.05)),
+                  spreadRadius: 5,
+                  color: Colors.grey.withOpacity(1)),
             ],
           ),
           child: Column(
@@ -92,36 +97,5 @@ class _ServicesWorkers extends State<ViewWorker> {
         onTap: () {
         },
       );
-  }
-}
-
-class TopBar extends StatelessWidget {
-  const TopBar({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            "Encuentra el servicio\nque desees:",
-            style: TextStyle(
-                color: Colors.black, fontSize: 30, fontWeight: FontWeight.bold),
-          ),
-          Container(
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                  offset: const Offset(12, 26),
-                  blurRadius: 50,
-                  spreadRadius: 0,
-                  color: Colors.grey.withOpacity(.25)),
-            ]),
-          )
-        ],
-      ),
-    );
   }
 }
