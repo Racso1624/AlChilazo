@@ -18,7 +18,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Servicios"),
-        backgroundColor: Color.fromARGB(225, 255, 4, 4),
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

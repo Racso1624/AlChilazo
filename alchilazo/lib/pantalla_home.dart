@@ -28,7 +28,7 @@ class _HomePage extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
@@ -38,12 +38,12 @@ class _HomePage extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Al Chilazo"),
-        backgroundColor: Color.fromARGB(225, 255, 4, 4),
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: Column(
         children: [
           //Text(personal_servicio.toString()),
-          Text("Bienvenido: ${widget.name}"),
+          Text("Hola, ${widget.name}"),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
             child: Text('Ofrecer Servicio'),

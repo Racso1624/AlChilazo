@@ -23,7 +23,7 @@ class _IngresoState extends State<Ingreso> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
@@ -34,7 +34,7 @@ class _IngresoState extends State<Ingreso> {
         child: Scaffold(
       appBar: AppBar(
         title: Text("Ingreso"),
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: Center(
         child: Column(

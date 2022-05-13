@@ -7,10 +7,11 @@ import 'MongoDbModel_Worker.dart';
 var lista_trabajos = [];
 
 class RegisterWorker extends StatefulWidget {
-  const RegisterWorker({Key? key, required this.name, required this.correo}) : super(key: key);
+  const RegisterWorker({Key? key, required this.name, required this.correo})
+      : super(key: key);
   final String name;
   final String correo;
-  
+
   @override
   State<RegisterWorker> createState() => _MyRegisterWorkerState();
 }
@@ -27,12 +28,27 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   var foto_perfil = TextEditingController();
 
   Future<void> _insertData(
-  String name, String address, String phone, String email, String descripcion, 
-  String foto_dpi, String antecedente_penal, String foto_perfil,) async {
+    String name,
+    String address,
+    String phone,
+    String email,
+    String descripcion,
+    String foto_dpi,
+    String antecedente_penal,
+    String foto_perfil,
+  ) async {
     var _id = M.ObjectId();
-    final data = MongoDbModel_Worker( 
-      id: _id, name: name, address: address, phone: phone, email: email, descripcion: descripcion, 
-      foto_dpi: foto_dpi, antecedente_penal: antecedente_penal, foto_perfil: foto_perfil, lista_trabajos: lista_trabajos);
+    final data = MongoDbModel_Worker(
+        id: _id,
+        name: name,
+        address: address,
+        phone: phone,
+        email: email,
+        descripcion: descripcion,
+        foto_dpi: foto_dpi,
+        antecedente_penal: antecedente_penal,
+        foto_perfil: foto_perfil,
+        lista_trabajos: lista_trabajos);
     var result = await MongoDatabase.insert_worker(data);
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("INSERTED ID " + _id.$oid)));
@@ -181,7 +197,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
         title: const Center(
           child: Text('Registro Trabajador'),
         ),
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       body: Stepper(
         type: StepperType.horizontal,
@@ -190,9 +206,16 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
         onStepContinue: () {
           if (_activeStepIndex < (stepList().length - 1)) {
             _activeStepIndex += 1;
-          }
-          else{
-            _insertData(widget.name, address.text, phone.text, widget.correo, descripcion.text, foto_dpi.text, antecedente_penal.text, foto_perfil.text);
+          } else {
+            _insertData(
+                widget.name,
+                address.text,
+                phone.text,
+                widget.correo,
+                descripcion.text,
+                foto_dpi.text,
+                antecedente_penal.text,
+                foto_perfil.text);
           }
           setState(() {});
         },
@@ -215,7 +238,6 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
     antecedente_penal.text = '';
     foto_perfil.text = '';
   }
-
 }
 
 class Card extends StatelessWidget {
@@ -230,8 +252,8 @@ class Card extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(left: 25.0, bottom: 15),
       child: new InkWell(
-        onTap: (){
-          if(!lista_trabajos.contains(text)){
+        onTap: () {
+          if (!lista_trabajos.contains(text)) {
             lista_trabajos.add(text);
           }
           print(lista_trabajos);

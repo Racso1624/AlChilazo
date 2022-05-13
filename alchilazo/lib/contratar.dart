@@ -16,7 +16,7 @@ class _Contratar extends State<Contratar> {
       appBar: AppBar(
         title: Text('Contratar Trabajador'),
         centerTitle: true,
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
       ),
       // ignore: prefer_const_constructors
       body: ListView(

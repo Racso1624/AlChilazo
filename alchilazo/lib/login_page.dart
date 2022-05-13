@@ -14,24 +14,20 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          title: Text("Al Chilazo"),
-          backgroundColor: Colors.red,
-        ),
+        backgroundColor: Colors.white,
         body: Center(
           child: Column(
             children: [
               Image.asset(
-                './images/alchilazo.png',
-                height: 300.0,
+                './images/logo_transparent.png',
+                height: 400.0,
               ),
               SizedBox(
-                height: 15.0,
+                height: 20.0,
               ),
               _bottonLogin(),
               SizedBox(
-                height: 15.0,
+                height: 20.0,
               ),
               _buttonRegister()
             ],
@@ -46,11 +42,12 @@ class _LoginPageState extends State<LoginPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return RaisedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-            child: Text('Log In'),
+            padding: EdgeInsets.symmetric(horizontal: 92.0, vertical: 20.0),
+            child: Text('Iniciar Sesión'),
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: const Color.fromRGBO(248, 216, 74, 1),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Ingreso()));
@@ -63,11 +60,12 @@ class _LoginPageState extends State<LoginPage> {
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return RaisedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-            child: Text('Sign Up'),
+            padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
+            child: Text('Registrarse'),
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: const Color.fromRGBO(248, 216, 74, 1),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Registro()));
