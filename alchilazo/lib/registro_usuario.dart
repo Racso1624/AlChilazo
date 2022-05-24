@@ -20,39 +20,93 @@ class _RegistroState extends State<Registro> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: Text("Registro"),
-        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
+    return Scaffold(
+        body: SingleChildScrollView(
+            child: Container(
+      constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height,
+          maxWidth: MediaQuery.of(context).size.width),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(colors: [
+          Color.fromRGBO(245, 71, 72, 1),
+          Color.fromRGBO(245, 71, 72, 20)
+        ], begin: Alignment.topLeft, end: Alignment.centerRight),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20.0,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 34.0, horizontal: 140.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    './images/logo-chile.png',
+                    width: 150,
+                    height: 150,
+                  ),
+                ],
+              ),
             ),
-            _nameTextField(),
-            SizedBox(
-              height: 20.0,
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Registro",
+                      style: TextStyle(
+                        color: Color.fromRGBO(25, 1, 1, 1),
+                        fontSize: 40,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    _nameTextField(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _dpiTextField(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _emailTextField(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _passwordTextField(),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    _buttonRegistrar(),
+                  ],
+                ),
+              ),
             ),
-            _emailTextField(),
-            SizedBox(
-              height: 20.0,
-            ),
-            _passwordTextField(),
-            SizedBox(
-              height: 20.0,
-            ),
-            _dpiTextField(),
-            SizedBox(
-              height: 25.0,
-            ),
-            _buttonRegistrar(),
-          ],
-        ),
+          ),
+        ],
       ),
-    ));
+    )));
   }
 
   Future<void> _insertData(
@@ -70,12 +124,18 @@ class _RegistroState extends State<Registro> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
           controller: name,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            icon: Icon(Icons.abc),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            prefixIcon: const Icon(Icons.abc),
             hintText: 'Ejemplo: Juan/Juana',
             labelText: 'Nombre',
           ),
@@ -90,12 +150,18 @@ class _RegistroState extends State<Registro> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
           controller: email,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            icon: Icon(Icons.email),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            prefixIcon: const Icon(Icons.email),
             hintText: 'ejemplo@correo.com',
             labelText: 'Correo electronico',
           ),
@@ -110,12 +176,18 @@ class _RegistroState extends State<Registro> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
           controller: pass,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            icon: Icon(Icons.lock),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            prefixIcon: Icon(Icons.lock),
             hintText: 'Ejemplo: 123456',
             labelText: 'Contraseña',
           ),
@@ -130,12 +202,18 @@ class _RegistroState extends State<Registro> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
           controller: dpi,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            icon: Icon(Icons.abc),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            prefixIcon: const Icon(Icons.account_circle),
             hintText: 'Ejemplo: 123456789',
             labelText: 'DPI',
           ),
@@ -149,12 +227,18 @@ class _RegistroState extends State<Registro> {
   Widget _buttonRegistrar() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return RaisedButton(
+      return ElevatedButton(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-          child: Text('Registrar'),
+          padding:
+              const EdgeInsets.symmetric(horizontal: 118.0, vertical: 25.0),
+          child: const Text('Registrar'),
         ),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        style: ElevatedButton.styleFrom(
+          primary: const Color.fromRGBO(245, 71, 72, 1),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w800,
+          ),
+        ),
         onPressed: () {
           _insertData(name.text, email.text, pass.text, dpi.text);
           Navigator.push(
