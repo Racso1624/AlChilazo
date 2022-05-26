@@ -17,6 +17,57 @@ class _RegistroState extends State<Registro> {
   var email = new TextEditingController();
   var pass = new TextEditingController();
   var dpi = new TextEditingController();
+  var arrData = [];
+  var existe = true;
+  //lista con nombres
+  List<String> usuario_existentes = [];
+
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        name.clear();
+        email.clear();
+        pass.clear();
+        dpi.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Usuario existente"),
+      content: Text("Este usuario con esta contraseña ya existe."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  Future _getData() async {
+    arrData = await MongoDatabase.getData_users();
+    for (var x = 0; x < arrData.length; x++) {
+      usuario_existentes.add(arrData[x]['correo'].toString());
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      _getData();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -240,16 +291,26 @@ class _RegistroState extends State<Registro> {
           ),
         ),
         onPressed: () {
-          _insertData(name.text, email.text, pass.text, dpi.text);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => HomePage(
-                name: name.text,
-                correo: email.text,
+          for (var i = 0; i < usuario_existentes.length; i++) {
+            if (email.text == usuario_existentes[i]) {
+              print("Este usuario ya existe");
+              existe = false;
+            }
+          }
+          if (existe == true) {
+            _insertData(name.text, email.text, pass.text, dpi.text);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  name: name.text,
+                  correo: email.text,
+                ),
               ),
-            ),
-          );
+            );
+          } else {
+            showAlertDialog(context);
+          }
         },
       );
     });
