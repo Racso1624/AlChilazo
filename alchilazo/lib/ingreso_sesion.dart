@@ -14,6 +14,66 @@ class _IngresoState extends State<Ingreso> {
   var name = TextEditingController();
   var pass = TextEditingController();
   var arrData = [];
+  var usuario = true;
+
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        name.clear();
+        pass.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Usuario o contraseña equivocada"),
+      content: Text(
+          "Asegure de escribir correctamente el usuario o la contraseña, o puede ser que no exista este usuario."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialogTextEmpty(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        name.clear();
+        pass.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Casillas no estan llenas"),
+      content: Text("Porfavor llene todas las casillas."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   Future _getData() async {
     arrData = await MongoDatabase.getData_users();
@@ -30,46 +90,103 @@ class _IngresoState extends State<Ingreso> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-      appBar: AppBar(
-        title: Text("Ingreso"),
-        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
+    return Scaffold(
+        body: SingleChildScrollView(
+            child: Container(
+      constraints: BoxConstraints(
+          maxHeight: MediaQuery.of(context).size.height,
+          maxWidth: MediaQuery.of(context).size.width),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(colors: [
+          Color.fromRGBO(245, 71, 72, 1),
+          Color.fromRGBO(245, 71, 72, 20)
+        ], begin: Alignment.topLeft, end: Alignment.centerRight),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15.0,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 2,
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 34.0, horizontal: 140.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(
+                    './images/logo-chile.png',
+                    width: 150,
+                    height: 150,
+                  ),
+                ],
+              ),
             ),
-            _userTextField(),
-            SizedBox(
-              height: 15.0,
+          ),
+          Expanded(
+            flex: 5,
+            child: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Iniciar Sesión",
+                      style: TextStyle(
+                        color: Color.fromRGBO(25, 1, 1, 1),
+                        fontSize: 40,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    _userTextField(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    _userPassword(),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    _buttonLogin(),
+                  ],
+                ),
+              ),
             ),
-            _userPassword(),
-            SizedBox(
-              height: 20.0,
-            ),
-            _buttonLogin(),
-            SizedBox(
-              height: 15.0,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
-    ));
+    )));
   }
 
   Widget _userTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
           controller: name,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
-            icon: Icon(Icons.email),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            prefixIcon: const Icon(Icons.email),
             hintText: 'ejemplo@correo.com',
             labelText: 'Correo electronico',
           ),
@@ -84,13 +201,19 @@ class _IngresoState extends State<Ingreso> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
           controller: pass,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
-            icon: Icon(Icons.lock),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide.none,
+            ),
+            filled: true,
+            fillColor: Colors.grey[200],
+            prefixIcon: const Icon(Icons.lock),
             hintText: 'password',
             labelText: 'Contraseña',
           ),
@@ -104,28 +227,37 @@ class _IngresoState extends State<Ingreso> {
   Widget _buttonLogin() {
     return StreamBuilder(
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return RaisedButton(
+        return ElevatedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-            child: Text('Ingresar'),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 100.0, vertical: 25.0),
+            child: const Text('Iniciar sesión'),
           ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          style: ElevatedButton.styleFrom(
+            primary: const Color.fromRGBO(245, 71, 72, 1),
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           onPressed: () {
             _getData();
-            print(name.text);
-            print(pass.text);
-            for (var x = 0; x < arrData.length; x++) {
-              if (name.text == arrData[x]['correo'].toString() &&
-                  pass.text == arrData[x]['password'].toString()) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(
-                            name: arrData[x]['nombre'],
-                            correo: arrData[x]['correo'])));
-                break;
+            if (name.text.isNotEmpty && pass.text.isNotEmpty) {
+              for (var x = 0; x < arrData.length; x++) {
+                if (name.text == arrData[x]['correo'].toString() && pass.text == arrData[x]['password'].toString()) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage(
+                              name: arrData[x]['nombre'],
+                              correo: arrData[x]['correo'])));
+                  break;
+                }
               }
+              if (usuario == false) {
+                showAlertDialog(context);
+              }
+            } else {
+              showAlertDialogTextEmpty(context);
             }
           },
         );

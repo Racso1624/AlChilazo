@@ -50,8 +50,6 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
         foto_perfil: foto_perfil,
         lista_trabajos: lista_trabajos);
     var result = await MongoDatabase.insert_worker(data);
-    ScaffoldMessenger.of(context)
-        .showSnackBar(SnackBar(content: Text("INSERTED ID " + _id.$oid)));
     _clearAll();
   }
 
@@ -197,7 +195,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
         title: const Center(
           child: Text('Registro Trabajador'),
         ),
-        backgroundColor: Color.fromRGBO(248, 216, 74, 1),
+        backgroundColor: Color.fromRGBO(245, 71, 72, 1)
       ),
       body: Stepper(
         type: StepperType.horizontal,
