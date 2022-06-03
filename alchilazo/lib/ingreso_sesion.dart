@@ -241,12 +241,9 @@ class _IngresoState extends State<Ingreso> {
           ),
           onPressed: () {
             _getData();
-            print(name.text);
-            print(pass.text);
             if (name.text.isNotEmpty && pass.text.isNotEmpty) {
               for (var x = 0; x < arrData.length; x++) {
-                if (name.text == arrData[x]['correo'].toString() &&
-                    pass.text == arrData[x]['password'].toString()) {
+                if (name.text == arrData[x]['correo'].toString() && pass.text == arrData[x]['password'].toString()) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -256,7 +253,6 @@ class _IngresoState extends State<Ingreso> {
                   break;
                 }
               }
-              usuario = false;
               if (usuario == false) {
                 showAlertDialog(context);
               }
