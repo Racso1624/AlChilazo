@@ -12,22 +12,28 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return WillPopScope(
+      onWillPop: () async {
+        return Navigator.canPop(context);
+      },
       child: Scaffold(
         backgroundColor: Colors.white,
         body: Center(
           child: Column(
             children: [
-              Image.asset(
-                './images/logo_transparent.png',
-                height: 400.0,
+              const SizedBox(
+                height: 80.0,
               ),
-              SizedBox(
-                height: 20.0,
+              Image.asset(
+                './images/logo-chile.png',
+                height: 250.0,
+              ),
+              const SizedBox(
+                height: 110.0,
               ),
               _bottonLogin(),
-              SizedBox(
-                height: 20.0,
+              const SizedBox(
+                height: 40.0,
               ),
               _buttonRegister()
             ],
@@ -47,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: const Color.fromRGBO(248, 216, 74, 1),
+          color: const Color.fromRGBO(245, 71, 72, 1),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Ingreso()));
@@ -65,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: const Color.fromRGBO(248, 216, 74, 1),
+          color: const Color.fromRGBO(245, 71, 72, 1),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Registro()));
