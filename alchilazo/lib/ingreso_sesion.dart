@@ -14,6 +14,66 @@ class _IngresoState extends State<Ingreso> {
   var name = TextEditingController();
   var pass = TextEditingController();
   var arrData = [];
+  var usuario = true;
+
+  showAlertDialog(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        name.clear();
+        pass.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Usuario o contraseña equivocada"),
+      content: Text(
+          "Asegure de escribir correctamente el usuario o la contraseña, o puede ser que no exista este usuario."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showAlertDialogTextEmpty(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        name.clear();
+        pass.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Casillas no estan llenas"),
+      content: Text("Porfavor llene todas las casillas."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   Future _getData() async {
     arrData = await MongoDatabase.getData_users();
@@ -183,17 +243,25 @@ class _IngresoState extends State<Ingreso> {
             _getData();
             print(name.text);
             print(pass.text);
-            for (var x = 0; x < arrData.length; x++) {
-              if (name.text == arrData[x]['correo'].toString() &&
-                  pass.text == arrData[x]['password'].toString()) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => HomePage(
-                            name: arrData[x]['nombre'],
-                            correo: arrData[x]['correo'])));
-                break;
+            if (name.text.isNotEmpty && pass.text.isNotEmpty) {
+              for (var x = 0; x < arrData.length; x++) {
+                if (name.text == arrData[x]['correo'].toString() &&
+                    pass.text == arrData[x]['password'].toString()) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomePage(
+                              name: arrData[x]['nombre'],
+                              correo: arrData[x]['correo'])));
+                  break;
+                }
               }
+              usuario = false;
+              if (usuario == false) {
+                showAlertDialog(context);
+              }
+            } else {
+              showAlertDialogTextEmpty(context);
             }
           },
         );

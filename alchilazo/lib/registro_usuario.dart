@@ -53,6 +53,37 @@ class _RegistroState extends State<Registro> {
     );
   }
 
+  showAlertDialogTextEmpty(BuildContext context) {
+    // Create button
+    Widget okButton = FlatButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        name.clear();
+        email.clear();
+        pass.clear();
+        dpi.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Casillas vacias"),
+      content: Text("Llene todas las casillas."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   Future _getData() async {
     arrData = await MongoDatabase.getData_users();
     for (var x = 0; x < arrData.length; x++) {
@@ -291,29 +322,32 @@ class _RegistroState extends State<Registro> {
           ),
         ),
         onPressed: () {
-          for (var i = 0; i < usuario_existentes.length; i++) {
-            if (email.text == usuario_existentes[i]) {
-              print("Este usuario ya existe");
-              existe = false;
+          if (name.text.isNotEmpty &&
+              email.text.isNotEmpty &&
+              pass.text.isNotEmpty &&
+              dpi.text.isNotEmpty) {
+            for (var i = 0; i < usuario_existentes.length; i++) {
+              if (email.text == usuario_existentes[i]) {
+                print("Este usuario ya existe");
+                existe = false;
+              }
             }
-          }
-          if (existe == true) {
-            print(name.text);
-            print(email.text);
-            print(pass.text);
-            print(dpi.text);
-            _insertData(name.text, email.text, pass.text, dpi.text);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomePage(
-                  name: name.text,
-                  correo: email.text,
+            if (existe == true) {
+              _insertData(name.text, email.text, pass.text, dpi.text);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(
+                    name: name.text,
+                    correo: email.text,
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              showAlertDialog(context);
+            }
           } else {
-            showAlertDialog(context);
+            showAlertDialogTextEmpty(context);
           }
         },
       );
