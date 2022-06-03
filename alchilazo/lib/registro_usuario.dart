@@ -37,8 +37,8 @@ class _RegistroState extends State<Registro> {
 
     // Create AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Usuario existente"),
-      content: Text("Este usuario con esta contraseña ya existe."),
+      title: Text("Correo registrado anteriormente"),
+      content: Text("Este correo ya esta registrado con otro usuario."),
       actions: [
         okButton,
       ],
@@ -298,6 +298,10 @@ class _RegistroState extends State<Registro> {
             }
           }
           if (existe == true) {
+            print(name.text);
+            print(email.text);
+            print(pass.text);
+            print(dpi.text);
             _insertData(name.text, email.text, pass.text, dpi.text);
             Navigator.push(
               context,
