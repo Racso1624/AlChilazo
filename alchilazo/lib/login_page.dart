@@ -46,14 +46,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget _bottonLogin() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return RaisedButton(
+      return ElevatedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 92.0, vertical: 20.0),
-            child: Text('Iniciar Sesión'),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 92.0, vertical: 28.0),
+            child: const Text('Iniciar Sesión'),
           ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: const Color.fromRGBO(245, 71, 72, 1),
+          style: ElevatedButton.styleFrom(
+            primary: const Color.fromRGBO(245, 71, 72, 1),
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Ingreso()));
@@ -64,14 +68,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buttonRegister() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return RaisedButton(
+      return ElevatedButton(
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 100.0, vertical: 20.0),
-            child: Text('Registrarse'),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 100.0, vertical: 28.0),
+            child: const Text('Registrarse'),
           ),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: const Color.fromRGBO(245, 71, 72, 1),
+          style: ElevatedButton.styleFrom(
+            primary: const Color.fromRGBO(245, 71, 72, 1),
+            textStyle: const TextStyle(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
           onPressed: () {
             Navigator.push(
                 context, MaterialPageRoute(builder: (context) => Registro()));
