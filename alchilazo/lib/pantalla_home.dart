@@ -39,56 +39,84 @@ class _HomePage extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(245, 249, 249, 249),
       appBar: AppBar(
-        title: Text("Al Chilazo"),
-        backgroundColor: Color.fromRGBO(245, 71, 72, 1)
-      ),
+          title: Text("Al Chilazo"),
+          backgroundColor: Color.fromRGBO(245, 71, 72, 1)),
       body: Column(
         children: [
-          Text("Hola, ${widget.name}"),
+          Text(
+            "Bien Venido, ${widget.name}",
+            style: TextStyle(fontSize: 20),
+          ),
+          Divider(
+            color: Colors.black,
+          ),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
-            child: Text('Ofrecer Servicio'),
+            child: Text('Registrarme como trabajador'),
             onPressed: () {
               print(usuario_existentes);
               for (var i = 0; i < usuario_existentes.length; i++) {
                 print(usuario_existentes[i]);
                 if (widget.correo == usuario_existentes[i]) {
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Servicios_Trabajador()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Servicios_Trabajador()));
                   break;
-                }
-                else{
-                  Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegisterWorker(name: widget.name, correo: widget.correo)));
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => RegisterWorker(
+                              name: widget.name, correo: widget.correo)));
                   break;
                 }
               }
             },
+            style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 255, 79, 66),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                textStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
           ),
           Divider(
             color: Colors.black,
           ),
           //muestra todos las personas disponibles que ofrecen servicios
           Text(
-            'Trabajadores existentes',
+            'Trabajadores que existen',
             style: TextStyle(
               fontSize: 25,
-              backgroundColor: Colors.grey,
+              fontWeight: FontWeight.bold,
             ),
           ),
           Container(
+            margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
             height: 90,
             child: ListView.separated(
               shrinkWrap: true,
               itemCount: personal_servicio.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
-                  child: Center(child: Text(personal_servicio[index])),
+                  child: Center(
+                      child: Text(
+                    personal_servicio[index],
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  )),
                 );
               },
               separatorBuilder: (BuildContext context, int index) =>
                   const Divider(),
+            ),
+            decoration: new BoxDecoration(
+              color: Color.fromARGB(255, 255, 79, 66),
             ),
           ),
           Divider(
@@ -96,11 +124,18 @@ class _HomePage extends State<HomePage> {
           ),
           //boton para buscar servicios
           ElevatedButton(
-            child: Text('Servicios'),
+            child: Text('Buscar Servicios'),
             onPressed: () {
               Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ServicesScreen()));
+                  MaterialPageRoute(builder: (context) => ServicesScreen()));
             },
+            style: ElevatedButton.styleFrom(
+                primary: Color.fromARGB(255, 255, 79, 66),
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                textStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                )),
           ),
         ],
       ),
