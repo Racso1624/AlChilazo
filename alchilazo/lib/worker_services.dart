@@ -15,61 +15,111 @@ class _ServiciosTrabajador extends State<Servicios_Trabajador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-      constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height,
-          maxWidth: MediaQuery.of(context).size.width),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Color.fromRGBO(245, 71, 72, 1),
-          Color.fromRGBO(245, 71, 72, 20)
-        ], begin: Alignment.topLeft, end: Alignment.centerRight),
+      appBar: AppBar(
+        title: Text("Servicios para Ofrecer"),
+        backgroundColor: Color.fromRGBO(245, 71, 72, 1),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 34.0, horizontal: 140.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    './images/logo-chile.png',
-                    width: 150,
-                    height: 150,
-                  ),
-                ],
-              ),
-            ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const CardListView(),
+            ],
           ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
-    )));
+    );
+  }
+}
+
+class CardListView extends StatelessWidget {
+  const CardListView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 25.0, right: 25.0, bottom: 15.0),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: 300,
+        child: ListView(
+          scrollDirection: Axis.vertical,
+          children: [
+            Card(
+                "Electricista",
+                "https://www.lecciona.com/wp-content/uploads/2020/11/ELECTRICISTA.jpg",
+                ""),
+            Card(
+                "Jardineria",
+                "https://media.istockphoto.com/photos/garden-worker-trimming-plants-picture-id1166203849?k=20&m=1166203849&s=612x612&w=0&h=UVoI3c9o4DljCFxpRpJznJE5zONRgo9sxeyysO7xVZw=",
+                ""),
+            Card(
+                "Plomeria",
+                "https://www.albaniles.org/wp-content/uploads/2016/08/plomero1-1024x713.jpg",
+                ""),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Card extends StatelessWidget {
+  final String text;
+  final String imageUrl;
+  final String subtitle;
+
+  Card(this.text, this.imageUrl, this.subtitle, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 25.0, bottom: 15),
+      child: new InkWell(
+        child: Container(
+          width: 150,
+          height: 150,
+          padding: const EdgeInsets.all(10.0),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12.5),
+            boxShadow: [
+              BoxShadow(
+                  offset: const Offset(10, 20),
+                  blurRadius: 10,
+                  spreadRadius: 0,
+                  color: Colors.grey.withOpacity(.05)),
+            ],
+          ),
+          child: Column(
+            children: [
+              Image.network(imageUrl, height: 70, fit: BoxFit.cover),
+              Spacer(),
+              Text(text,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  )),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                subtitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    color: Colors.grey,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 12),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

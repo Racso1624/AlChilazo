@@ -47,7 +47,7 @@ class _ServicesWorkers extends State<ViewWorker> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Trabajadores"),
-          backgroundColor: Color.fromRGBO(248, 216, 74, 1),
+          backgroundColor: Color.fromRGBO(245, 71, 72, 1),
         ),
         backgroundColor: Colors.white,
         body: ListView.builder(
