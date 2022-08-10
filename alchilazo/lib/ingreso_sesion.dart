@@ -83,7 +83,7 @@ class _IngresoState extends State<Ingreso> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
@@ -243,7 +243,8 @@ class _IngresoState extends State<Ingreso> {
             _getData();
             if (name.text.isNotEmpty && pass.text.isNotEmpty) {
               for (var x = 0; x < arrData.length; x++) {
-                if (name.text == arrData[x]['correo'].toString() && pass.text == arrData[x]['password'].toString()) {
+                if (name.text == arrData[x]['correo'].toString() &&
+                    pass.text == arrData[x]['password'].toString()) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
