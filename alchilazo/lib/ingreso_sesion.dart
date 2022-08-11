@@ -18,7 +18,7 @@ class _IngresoState extends State<Ingreso> {
 
   showAlertDialog(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -48,7 +48,7 @@ class _IngresoState extends State<Ingreso> {
 
   showAlertDialogTextEmpty(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
