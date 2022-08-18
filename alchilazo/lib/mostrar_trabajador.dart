@@ -21,25 +21,25 @@ class _ServicesWorkers extends State<ViewWorker> {
   Future _getData() async {
     arrData = await MongoDatabase.getData_workers();
     setState(() {});
-    for(int i = 0; i < arrData.length; i++){
-        for(int j = 0; j < arrData[i]["lista_trabajos"].length; j++){
-          if(arrData[i]["lista_trabajos"][j] == widget.trabajo){
-            trabajadores.add(arrData[i]);
-          }
+    for (int i = 0; i < arrData.length; i++) {
+      for (int j = 0; j < arrData[i]["lista_trabajos"].length; j++) {
+        if (arrData[i]["lista_trabajos"][j] == widget.trabajo) {
+          trabajadores.add(arrData[i]);
         }
       }
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
 
   final String imageUrl =
-  "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+      "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +106,10 @@ class _ServicesWorkers extends State<ViewWorker> {
       ),
       onTap: () {
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: ((context) => Contratar(
-              info_trabajador: trabajadores[index]))));
+            context,
+            MaterialPageRoute(
+                builder: ((context) =>
+                    Contratar(info_trabajador: trabajadores[index]))));
       },
     );
   }

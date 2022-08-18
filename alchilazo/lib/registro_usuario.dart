@@ -24,7 +24,7 @@ class _RegistroState extends State<Registro> {
 
   showAlertDialog(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -55,7 +55,7 @@ class _RegistroState extends State<Registro> {
 
   showAlertDialogTextEmpty(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -95,7 +95,7 @@ class _RegistroState extends State<Registro> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
