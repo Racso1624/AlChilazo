@@ -313,41 +313,56 @@ class Card extends StatelessWidget {
 }
 
 class MapScreen extends StatefulWidget {
-  const MapScreen({Key? key}) : super(key: key);
-
   @override
-  State<MapScreen> createState() => _MapScreenState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
-  static const _initialCameraPosition = CameraPosition(
-    target: LatLng(37.773972, -122.431297),
-    zoom: 11.5,
-  );
+  GoogleMapController? mapController; //contrller for Google map
+  Set<Marker> markers = Set(); //markers for google map
+  LatLng showLocation = LatLng(27.7089427, 85.3086209);
 
-  late GoogleMapController _googleMapController;
   @override
-  void dispose() {
-    _googleMapController.dispose();
-    super.dispose();
+  void initState() {
+    markers.add(Marker(
+      //add marker on google map
+      markerId: MarkerId(showLocation.toString()),
+      position: showLocation, //position of marker
+      infoWindow: InfoWindow(
+        //popup info
+        title: 'My Custom Title ',
+        snippet: 'My Custom Subtitle',
+      ),
+      icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+    ));
+
+    //you can add more markers here
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        myLocationButtonEnabled: false,
-        zoomControlsEnabled: false,
-        initialCameraPosition: _initialCameraPosition,
-        onMapCreated: (controller) => _googleMapController = controller,
+      appBar: AppBar(
+        title: Text("Google Map in Flutter"),
+        backgroundColor: Colors.deepPurpleAccent,
       ),
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Colors.black,
-        onPressed: () => _googleMapController.animateCamera(
-          CameraUpdate.newCameraPosition(_initialCameraPosition),
+      body: GoogleMap(
+        //Map widget from google_maps_flutter package
+        zoomGesturesEnabled: true, //enable Zoom in, out on map
+        initialCameraPosition: CameraPosition(
+          //innital position in map
+          target: showLocation, //initial position
+          zoom: 10.0, //initial zoom level
         ),
-        child: const Icon(Icons.center_focus_strong),
+        markers: markers, //markers to show on map
+        mapType: MapType.normal, //map type
+        onMapCreated: (controller) {
+          //method called when map is created
+          setState(() {
+            mapController = controller;
+          });
+        },
       ),
     );
   }
