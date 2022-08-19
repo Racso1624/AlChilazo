@@ -32,5 +32,7 @@
             android:value="2" />
         <meta-data android:name="com.google.android.geo.API_KEY"  
              android:value="AIzaSyC0ugfTzPUKtxYBYFI7jDzcxgT0tH4e2Fo"/>
+        <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     </application>
 </manifest>
