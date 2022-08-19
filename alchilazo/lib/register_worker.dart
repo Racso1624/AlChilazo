@@ -171,16 +171,21 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
               ],
             )),
         Step(
-            state:
-                _activeStepIndex <= 3 ? StepState.editing : StepState.complete,
-            isActive: _activeStepIndex >= 3,
-            title: const Text('Localizacion'),
-            content: Column(
-              children: [MapScreen()],
-            )),
+          state: _activeStepIndex <= 3 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 3,
+          title: const Text('Ubicacion'),
+          content: Center(
+            child: Container(
+              width: 400.0,
+              height: 500.0,
+              padding: const EdgeInsets.all(20.0),
+              child: MapScreen(),
+            ),
+          ),
+        ),
         Step(
             state: StepState.complete,
-            isActive: _activeStepIndex >= 3,
+            isActive: _activeStepIndex >= 4,
             title: const Text('Confirmar'),
             content: Container(
               child: Column(
@@ -320,7 +325,7 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
-  LatLng showLocation = LatLng(27.7089427, 85.3086209);
+  LatLng showLocation = LatLng(14.569763, -90.559597);
 
   @override
   void initState() {
