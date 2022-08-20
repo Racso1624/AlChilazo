@@ -5,8 +5,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:flutter/material.dart';
 import 'MongoDbModel_Worker.dart';
-import 'package:geolocator/geolocator.dart';
 import 'dart:async';
+import 'package:location/location.dart';
 
 var lista_trabajos = [];
 
@@ -21,87 +21,6 @@ class RegisterWorker extends StatefulWidget {
 }
 
 class _MyRegisterWorkerState extends State<RegisterWorker> {
-  bool servicestatus = false;
-  bool haspermission = false;
-  late LocationPermission permission;
-  late Position position;
-  String long = "", lat = "";
-  late StreamSubscription<Position> positionStream;
-
-  @override
-  void initState() {
-    checkGps();
-    super.initState();
-  }
-
-  checkGps() async {
-    servicestatus = await Geolocator.isLocationServiceEnabled();
-    if (servicestatus) {
-      permission = await Geolocator.checkPermission();
-
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          print('Location permissions are denied');
-        } else if (permission == LocationPermission.deniedForever) {
-          print("'Location permissions are permanently denied");
-        } else {
-          haspermission = true;
-        }
-      } else {
-        haspermission = true;
-      }
-
-      if (haspermission) {
-        setState(() {
-          //refresh the UI
-        });
-
-        getLocation();
-      }
-    } else {
-      print("GPS Service is not enabled, turn on GPS location");
-    }
-
-    setState(() {
-      //refresh the UI
-    });
-  }
-
-  getLocation() async {
-    position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(position.longitude); //Output: 80.24599079
-    print(position.latitude); //Output: 29.6593457
-
-    long = position.longitude.toString();
-    lat = position.latitude.toString();
-
-    setState(() {
-      //refresh UI
-    });
-
-    LocationSettings locationSettings = LocationSettings(
-      accuracy: LocationAccuracy.high, //accuracy of the location data
-      distanceFilter: 100, //minimum distance (measured in meters) a
-      //device must move horizontally before an update event is generated;
-    );
-
-    StreamSubscription<Position> positionStream =
-        Geolocator.getPositionStream(locationSettings: locationSettings)
-            .listen((Position position) {
-      print(position.longitude); //Output: 80.24599079
-      print(position.latitude); //Output: 29.6593457
-
-      long = position.longitude.toString();
-      lat = position.latitude.toString();
-
-      setState(() {
-        //refresh UI on update
-      });
-    });
-  }
-
   int _activeStepIndex = 0;
 
   var address = TextEditingController();
@@ -262,7 +181,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
               width: 400.0,
               height: 500.0,
               padding: const EdgeInsets.all(20.0),
-              child: MapScreen(double.parse(long), double.parse(lat)),
+              child: MapScreen(),
             ),
           ),
         ),
@@ -401,26 +320,29 @@ class Card extends StatelessWidget {
 }
 
 class MapScreen extends StatefulWidget {
-  MapScreen(double long, double lat);
-
-  static double get lat => MapScreen.lat;
-
-  static double get long => MapScreen.long;
-
   @override
-  _MapScreenState createState() => _MapScreenState(long, lat);
+  _MapScreenState createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
-  _MapScreenState(double long, double lat);
   GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
 
-  static double get lat => _MapScreenState.lat;
+  LatLng showLocation = LatLng(14.569500, -90.559613);
+  late GoogleMapController _controller;
+  Location _location = Location();
 
-  static double get long => _MapScreenState.long;
-
-  LatLng showLocation = LatLng(long, lat);
+  void _onMapCreated(GoogleMapController _cntlr) {
+    _controller = _cntlr;
+    _location.onLocationChanged.listen((l) {
+      _controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(l.latitude!, l.longitude!), zoom: 15),
+        ),
+      );
+    });
+    print(showLocation);
+  }
 
   @override
   void initState() {
@@ -457,12 +379,8 @@ class _MapScreenState extends State<MapScreen> {
         ),
         markers: markers, //markers to show on map
         mapType: MapType.normal, //map type
-        onMapCreated: (controller) {
-          //method called when map is created
-          setState(() {
-            mapController = controller;
-          });
-        },
+        onMapCreated: _onMapCreated,
+        myLocationEnabled: true,
       ),
     );
   }
