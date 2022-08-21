@@ -116,8 +116,8 @@ class _IngresoState extends State<Ingreso> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    './images/logo-chile.png',
-                    width: 150,
+                    'images/logo-chile.png',
+                    width: 100,
                     height: 150,
                   ),
                 ],

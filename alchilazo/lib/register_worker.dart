@@ -325,7 +325,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  GoogleMapController? mapController; //contrller for Google map
+  // GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
 
   LatLng showLocation = LatLng(14.569500, -90.559613);
@@ -365,23 +365,29 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Google Map in Flutter"),
-        backgroundColor: Colors.deepPurpleAccent,
-      ),
-      body: GoogleMap(
-        //Map widget from google_maps_flutter package
-        zoomGesturesEnabled: true, //enable Zoom in, out on map
-        initialCameraPosition: CameraPosition(
-          //innital position in map
-          target: showLocation, //initial position
-          zoom: 10.0, //initial zoom level
+        appBar: AppBar(
+          title: Text("Localizacion"),
+          backgroundColor: Colors.deepPurpleAccent,
         ),
-        markers: markers, //markers to show on map
-        mapType: MapType.normal, //map type
-        onMapCreated: _onMapCreated,
-        myLocationEnabled: true,
-      ),
-    );
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Stack(
+            children: [
+              GoogleMap(
+                //Map widget from google_maps_flutter package
+                zoomGesturesEnabled: true, //enable Zoom in, out on map
+                initialCameraPosition: CameraPosition(
+                  //innital position in map
+                  target: showLocation, //initial position
+                ),
+                markers: markers, //markers to show on map
+                mapType: MapType.normal, //map type
+                onMapCreated: _onMapCreated,
+                myLocationEnabled: true,
+              ),
+            ],
+          ),
+        ));
   }
 }
