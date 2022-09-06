@@ -9,6 +9,7 @@ import 'dart:async';
 import 'package:location/location.dart';
 
 var lista_trabajos = [];
+var lati, long = 0.0;
 
 class RegisterWorker extends StatefulWidget {
   const RegisterWorker({Key? key, required this.name, required this.correo})
@@ -43,16 +44,19 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   ) async {
     var _id = M.ObjectId();
     final data = MongoDbModel_Worker(
-        id: _id,
-        name: name,
-        address: address,
-        phone: phone,
-        email: email,
-        descripcion: descripcion,
-        foto_dpi: foto_dpi,
-        antecedente_penal: antecedente_penal,
-        foto_perfil: foto_perfil,
-        lista_trabajos: lista_trabajos);
+      id: _id,
+      name: name,
+      address: address,
+      phone: phone,
+      email: email,
+      descripcion: descripcion,
+      foto_dpi: foto_dpi,
+      antecedente_penal: antecedente_penal,
+      foto_perfil: foto_perfil,
+      lista_trabajos: lista_trabajos,
+      latitud: lati,
+      longitud: long,
+    );
     var result = await MongoDatabase.insert_worker(data);
     _clearAll();
   }
@@ -199,7 +203,9 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   Text('Descripcion: ${descripcion.text}'),
                   Text('Foto_perfil: ${foto_perfil.text}'),
                   Text('Foto Antecedente penales: ${antecedente_penal.text}'),
-                  Text('Foto DPI: ${foto_dpi.text}')
+                  Text('Foto DPI: ${foto_dpi.text}'),
+                  Text('latitud: $lati'),
+                  Text('longitud: $long'),
                 ],
               ),
             ))
@@ -337,17 +343,18 @@ class _MapScreenState extends State<MapScreen> {
     _location.onLocationChanged.listen((l) {
       _controller.animateCamera(
         CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(l.latitude!, l.longitude!), zoom: 15),
+          CameraPosition(
+              target: LatLng(lati = l.latitude!, long = l.longitude!),
+              zoom: 15),
         ),
       );
     });
-    print(showLocation);
   }
 
   @override
   void initState() {
     markers.add(Marker(
-      //add marker on google map
+      //add marker on google map para mostrar posiciones que ya esten en la base de datos
       markerId: MarkerId(showLocation.toString()),
       position: showLocation, //position of marker
       infoWindow: InfoWindow(

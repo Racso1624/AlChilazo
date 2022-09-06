@@ -1,10 +1,12 @@
 import 'dart:convert';
+import 'package:geolocator/geolocator.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 MongoDbModel_Worker mongoDbModelFromJson(String str) =>
     MongoDbModel_Worker.fromJson(json.decode(str));
 
-String mongoDbModelToJson(MongoDbModel_Worker data) => json.encode(data.toJson());
+String mongoDbModelToJson(MongoDbModel_Worker data) =>
+    json.encode(data.toJson());
 
 class MongoDbModel_Worker {
   MongoDbModel_Worker({
@@ -17,7 +19,9 @@ class MongoDbModel_Worker {
     required this.foto_dpi,
     required this.antecedente_penal,
     required this.foto_perfil,
-    required this.lista_trabajos
+    required this.lista_trabajos,
+    required this.latitud,
+    required this.longitud,
   });
 
   ObjectId id;
@@ -30,8 +34,11 @@ class MongoDbModel_Worker {
   String antecedente_penal;
   String foto_perfil;
   List lista_trabajos;
+  double latitud;
+  double longitud;
 
-  factory MongoDbModel_Worker.fromJson(Map<String, dynamic> json) => MongoDbModel_Worker(
+  factory MongoDbModel_Worker.fromJson(Map<String, dynamic> json) =>
+      MongoDbModel_Worker(
         id: json["_id"],
         name: json["name"],
         address: json["address"],
@@ -41,7 +48,9 @@ class MongoDbModel_Worker {
         foto_dpi: json["foto_dpi"],
         antecedente_penal: json["antecedente_penal"],
         foto_perfil: json["foto_perfil"],
-        lista_trabajos: json["lista_trabajos"]
+        lista_trabajos: json["lista_trabajos"],
+        latitud: json["latitud"],
+        longitud: json["longitud"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,6 +63,8 @@ class MongoDbModel_Worker {
         "foto_dpi": foto_dpi,
         "antecedente_penal": antecedente_penal,
         "foto_perfil": foto_perfil,
-        "lista_trabajos": lista_trabajos
+        "lista_trabajos": lista_trabajos,
+        "latitud": latitud,
+        "longitud": longitud,
       };
 }
