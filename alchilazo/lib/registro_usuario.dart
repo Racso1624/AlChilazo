@@ -128,9 +128,9 @@ class _RegistroState extends State<Registro> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    './images/logo-chile.png',
-                    width: 150,
-                    height: 150,
+                    'images/logo-chile.png',
+                    width: 100,
+                    height: 100,
                   ),
                 ],
               ),
