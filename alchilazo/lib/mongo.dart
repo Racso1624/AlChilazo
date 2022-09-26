@@ -12,6 +12,7 @@ class MongoDatabase {
     inspect(db);
     userCollection = db.collection(USER_COLLECTION);
     workerCollection = db.collection(WORKER_COLLECTION);
+    return true;
   }
 
   static Future<List<Map<String, dynamic>>> getData_users() async {
