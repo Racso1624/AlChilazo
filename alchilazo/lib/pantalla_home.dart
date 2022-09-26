@@ -4,6 +4,19 @@ import 'package:alchilazo/services_screen.dart';
 import 'package:alchilazo/worker_services.dart';
 import 'package:flutter/material.dart';
 
+class HomePage_material extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: HomePage(
+        correo: 'par20117@uvg.edu.gt',
+        name: 'yong',
+      ),
+    );
+  }
+}
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.name, required this.correo})
       : super(key: key);

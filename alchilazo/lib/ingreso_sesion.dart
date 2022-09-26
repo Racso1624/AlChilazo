@@ -2,6 +2,15 @@ import 'package:alchilazo/mongo.dart';
 import 'package:alchilazo/pantalla_home.dart';
 import 'package:flutter/material.dart';
 
+class Ingreso_material extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Ingreso(),
+    );
+  }
+}
+
 class Ingreso extends StatefulWidget {
   static String id = 'ingreso_sesion';
 
@@ -118,7 +127,7 @@ class _IngresoState extends State<Ingreso> {
                   Image.asset(
                     'images/logo-chile.png',
                     width: 100,
-                    height: 150,
+                    height: 100,
                   ),
                 ],
               ),
@@ -150,7 +159,7 @@ class _IngresoState extends State<Ingreso> {
                       ),
                     ),
                     const SizedBox(
-                      height: 100,
+                      height: 80,
                     ),
                     _userTextField(),
                     const SizedBox(
@@ -158,7 +167,7 @@ class _IngresoState extends State<Ingreso> {
                     ),
                     _userPassword(),
                     const SizedBox(
-                      height: 60,
+                      height: 40,
                     ),
                     _buttonLogin(),
                   ],
