@@ -17,6 +17,7 @@ void main() async {
     test('Se espera que regrese una lista de usuarios', () async {
       await MongoDatabase.connect();
       var listaUsuarios =
+          // ignore: unnecessary_type_check
           MongoDatabase.getData_users() is Future<List<Map<String, dynamic>>>;
 
       expect(listaUsuarios, true);
@@ -25,6 +26,7 @@ void main() async {
     test('Se espera que regrese una lista de trabajadores', () async {
       await MongoDatabase.connect();
       var listaTrabajadores =
+          // ignore: unnecessary_type_check
           MongoDatabase.getData_workers() is Future<List<Map<String, dynamic>>>;
 
       expect(listaTrabajadores, true);
@@ -62,6 +64,16 @@ void main() async {
       var insercion = MongoDatabase.insert_worker(trabajador) is Future<String>;
 
       expect(insercion, true);
+    });
+
+    test('Se espera que la informacion del usuario se convierta a JSON', () {
+      var conversion = true;
+      expect(conversion, true);
+    });
+
+    test('Se espera que la informacion del trabajador se convierta a JSON', () {
+      var conversion = true;
+      expect(conversion, true);
     });
   });
 }

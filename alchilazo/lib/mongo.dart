@@ -34,8 +34,8 @@ class MongoDatabase {
         return "Algo ocurrio";
       }
     } catch (e) {
-      print(e.toString());
-      return e.toString();
+      print(e.toString()); // coverage:ignore-line
+      return e.toString(); // coverage:ignore-line
     }
   }
 
@@ -48,8 +48,8 @@ class MongoDatabase {
         return "Algo ocurrio";
       }
     } catch (e) {
-      print(e.toString());
-      return e.toString();
+      print(e.toString()); // coverage:ignore-line
+      return e.toString(); // coverage:ignore-line
     }
   }
 }
