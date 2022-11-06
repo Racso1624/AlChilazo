@@ -67,6 +67,7 @@ class _HomePage extends State<HomePage> {
           ),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
+            key: const Key("WorkerRegister"),
             child: Text('Registrarme como trabajador'),
             onPressed: () {
               print(usuario_existentes);
@@ -137,6 +138,7 @@ class _HomePage extends State<HomePage> {
           ),
           //boton para buscar servicios
           ElevatedButton(
+            key: const Key("SearchService"),
             child: Text('Buscar Servicios'),
             onPressed: () {
               Navigator.push(context,

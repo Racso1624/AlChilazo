@@ -73,6 +73,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("dirrecion"),
                   controller: address,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -82,6 +83,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("phone"),
                   controller: phone,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -91,6 +93,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("description"),
                   controller: descripcion,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -109,6 +112,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             content: Column(
               children: [
                 TextField(
+                  key: const Key("perfil"),
                   controller: foto_perfil,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Foto perfil'),
@@ -117,6 +121,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("antecedentes"),
                   controller: antecedente_penal,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -126,6 +131,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("dpiPhoto"),
                   controller: foto_dpi,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Foto DPI'),
@@ -245,6 +251,21 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
           }
           _activeStepIndex -= 1;
           setState(() {});
+        },
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return Row(
+            children: <Widget>[
+              ElevatedButton(
+                key: const Key("continue"),
+                onPressed: details.onStepContinue,
+                child: const Text("Continue"),
+              ),
+              ElevatedButton(
+                onPressed: details.onStepCancel,
+                child: const Text("Cancel"),
+              ),
+            ],
+          );
         },
       ),
     );

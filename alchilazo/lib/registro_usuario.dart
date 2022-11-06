@@ -206,6 +206,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("UserName"),
           controller: name,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -232,6 +233,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("correo"),
           controller: email,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -258,6 +260,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("contrasena"),
           controller: pass,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -284,6 +287,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("dpi"),
           controller: dpi,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -308,6 +312,7 @@ class _RegistroState extends State<Registro> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return ElevatedButton(
+        key: const Key("newUser"),
         child: Container(
           padding:
               const EdgeInsets.symmetric(horizontal: 118.0, vertical: 25.0),
