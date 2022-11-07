@@ -59,7 +59,7 @@ class _HomePage extends State<HomePage> {
       body: Column(
         children: [
           Text(
-            "Bien Venido, ${widget.name}",
+            "Bienvenido, ${widget.name}",
             style: TextStyle(fontSize: 20),
           ),
           Divider(
@@ -67,8 +67,8 @@ class _HomePage extends State<HomePage> {
           ),
           //boton para ir a llenar para ofrecer servicios
           ElevatedButton(
-            key: const Key("WorkerRegister"),
-            child: Text('Registrarme como trabajador'),
+            key: const Key("Trabajador"),
+            child: Text('Sección de Trabajador'),
             onPressed: () {
               var trabajador_existe = null;
               for (var i = 0; i < usuario_existentes.length; i++) {
