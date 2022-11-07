@@ -1,6 +1,10 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables
+import 'package:alchilazo/MongoDbModel_Order.dart';
+import 'package:alchilazo/contratar.dart';
 import 'package:alchilazo/mongo.dart';
+import 'package:alchilazo/pantalla_home.dart';
 import 'package:flutter/material.dart';
+import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
@@ -18,10 +22,19 @@ class _Solicitud extends State<Solicitud> {
   var titulo = TextEditingController();
   var descripcion = TextEditingController();
   var arrData = [];
+  double latitud = 0;
+  double longitud = 0;
 
   Future _getData() async {
     arrData = await MongoDatabase.getData_users();
     setState(() {});
+  }
+
+  Future<void> _insertData(String title, String description) async {
+    var _id = M.ObjectId();
+    final data = MongoDbModel_Order(
+        id: _id, worker_id: widget.info_trabajador["_id"],title: title, description: description, latitud: latitud, longitud: longitud);
+    var result = await MongoDatabase.insert_order(data);
   }
 
   /* 
@@ -142,6 +155,67 @@ class _Solicitud extends State<Solicitud> {
         //Variable que recibirá el correo
         onChanged: (value) {},
       ),
+    );
+  }
+
+  Widget _buttonOrder() {
+    return ElevatedButton(
+      key: const Key("order"),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 25.0),
+        child: const Text('Realizar Solicitud'),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: const Color.fromRGBO(245, 71, 72, 1),
+        textStyle: const TextStyle(
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      onPressed: () {
+        if (titulo.text.isNotEmpty && descripcion.text.isNotEmpty){
+              _insertData(titulo.text, descripcion.text);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => HomePage(
+              //       name: name.text,
+              //       correo: email.text,
+              //     ),
+              //   ),
+              // );
+          } else {
+            showAlertDialogTextEmpty(context);
+          }
+      },
+    );
+  }
+
+  showAlertDialogTextEmpty(BuildContext context) {
+    // Create button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+        titulo.clear();
+        descripcion.clear();
+      },
+    );
+
+    // Create AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Casillas no estan llenas"),
+      content: Text("Porfavor llene todas las casillas."),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 
