@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, duplicate_ignore, prefer_const_literals_to_create_immutables
 import 'package:alchilazo/mongo.dart';
+import 'package:alchilazo/solicitud_servicio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
@@ -117,7 +118,11 @@ class _Contratar extends State<Contratar> {
           Align(
             alignment: Alignment.center,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(
+                builder: ((context) =>
+                    Solicitud(info_trabajador: widget.info_trabajador))));
+              },
               style: ElevatedButton.styleFrom(primary: Colors.red),
               child: Text(
                 'Contratar',

@@ -18,6 +18,10 @@ class _Solicitud extends State<Solicitud> {
   var titulo = TextEditingController();
   var descripcion = TextEditingController();
 
+  /* 
+    Con el siguiente Widget se construye el cuerpo de la aplicación.
+  */
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,6 +83,12 @@ class _Solicitud extends State<Solicitud> {
     );
   }
 
+  /*
+    El siguiente Widget será utilizado para darle titulo
+    al problema que el usuario quiere resolver al momento de 
+    contratar un servicio.
+  */
+
   Widget _titleTextField() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -101,6 +111,12 @@ class _Solicitud extends State<Solicitud> {
     );
   }
 
+  /*
+    El siguiente Widget será utilizado para darle la descripción
+    del problema que el usuario quiere resolver al momento de 
+    contratar un servicio. 
+  */
+
   Widget _descriptionTextField() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -120,7 +136,6 @@ class _Solicitud extends State<Solicitud> {
         //Variable que recibirá el correo
         onChanged: (value) {},
       ),
-      //BUENAS TURDES :3, Q mierda es flutter y live share
     );
   }
 
