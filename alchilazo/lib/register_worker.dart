@@ -243,9 +243,9 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 foto_dpi.text,
                 antecedente_penal.text,
                 foto_perfil.text);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: widget.name, correo: widget.correo)));
           }
           setState(() {});
-          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: widget.name, correo: widget.correo)));
         },
         onStepCancel: () {
           if (_activeStepIndex == 0) {
