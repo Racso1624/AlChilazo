@@ -17,6 +17,12 @@ class _Solicitud extends State<Solicitud> {
 
   var titulo = TextEditingController();
   var descripcion = TextEditingController();
+  var arrData = [];
+
+  Future _getData() async {
+    arrData = await MongoDatabase.getData_users();
+    setState(() {});
+  }
 
   /* 
     Con el siguiente Widget se construye el cuerpo de la aplicación.
