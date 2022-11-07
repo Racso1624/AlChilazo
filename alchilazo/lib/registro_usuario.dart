@@ -24,7 +24,7 @@ class _RegistroState extends State<Registro> {
 
   showAlertDialog(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -55,7 +55,7 @@ class _RegistroState extends State<Registro> {
 
   showAlertDialogTextEmpty(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -95,7 +95,7 @@ class _RegistroState extends State<Registro> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
@@ -128,9 +128,9 @@ class _RegistroState extends State<Registro> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    './images/logo-chile.png',
-                    width: 150,
-                    height: 150,
+                    'images/logo-chile.png',
+                    width: 100,
+                    height: 100,
                   ),
                 ],
               ),
@@ -206,6 +206,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("UserName"),
           controller: name,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -232,6 +233,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("correo"),
           controller: email,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -258,6 +260,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("contrasena"),
           controller: pass,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -284,6 +287,7 @@ class _RegistroState extends State<Registro> {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: TextField(
+          key: const Key("dpi"),
           controller: dpi,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -308,6 +312,7 @@ class _RegistroState extends State<Registro> {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return ElevatedButton(
+        key: const Key("newUser"),
         child: Container(
           padding:
               const EdgeInsets.symmetric(horizontal: 118.0, vertical: 25.0),

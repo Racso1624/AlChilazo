@@ -2,6 +2,15 @@ import 'package:alchilazo/mongo.dart';
 import 'package:alchilazo/pantalla_home.dart';
 import 'package:flutter/material.dart';
 
+class Ingreso_material extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Ingreso(),
+    );
+  }
+}
+
 class Ingreso extends StatefulWidget {
   static String id = 'ingreso_sesion';
 
@@ -18,7 +27,7 @@ class _IngresoState extends State<Ingreso> {
 
   showAlertDialog(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -48,7 +57,7 @@ class _IngresoState extends State<Ingreso> {
 
   showAlertDialogTextEmpty(BuildContext context) {
     // Create button
-    Widget okButton = FlatButton(
+    Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
         Navigator.of(context).pop();
@@ -83,7 +92,7 @@ class _IngresoState extends State<Ingreso> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
@@ -116,9 +125,9 @@ class _IngresoState extends State<Ingreso> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Image.asset(
-                    './images/logo-chile.png',
-                    width: 150,
-                    height: 150,
+                    'images/logo-chile.png',
+                    width: 100,
+                    height: 100,
                   ),
                 ],
               ),
@@ -150,7 +159,7 @@ class _IngresoState extends State<Ingreso> {
                       ),
                     ),
                     const SizedBox(
-                      height: 100,
+                      height: 80,
                     ),
                     _userTextField(),
                     const SizedBox(
@@ -158,7 +167,7 @@ class _IngresoState extends State<Ingreso> {
                     ),
                     _userPassword(),
                     const SizedBox(
-                      height: 60,
+                      height: 40,
                     ),
                     _buttonLogin(),
                   ],
@@ -172,95 +181,88 @@ class _IngresoState extends State<Ingreso> {
   }
 
   Widget _userTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: TextField(
-          controller: name,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide.none,
-            ),
-            filled: true,
-            fillColor: Colors.grey[200],
-            prefixIcon: const Icon(Icons.email),
-            hintText: 'ejemplo@correo.com',
-            labelText: 'Correo electronico',
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: TextField(
+        key: const Key('usuario'),
+        controller: name,
+        keyboardType: TextInputType.emailAddress,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none,
           ),
-          //Variable que recibirá el correo
-          onChanged: (value) {},
+          filled: true,
+          fillColor: Colors.grey[200],
+          prefixIcon: const Icon(Icons.email),
+          hintText: 'ejemplo@correo.com',
+          labelText: 'Correo electronico',
         ),
-      );
-    });
+        //Variable que recibirá el correo
+        onChanged: (value) {},
+      ),
+    );
   }
 
   Widget _userPassword() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-        child: TextField(
-          controller: pass,
-          keyboardType: TextInputType.emailAddress,
-          obscureText: true,
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide.none,
-            ),
-            filled: true,
-            fillColor: Colors.grey[200],
-            prefixIcon: const Icon(Icons.lock),
-            hintText: 'password',
-            labelText: 'Contraseña',
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: TextField(
+        key: const Key('contrasena'),
+        controller: pass,
+        keyboardType: TextInputType.emailAddress,
+        obscureText: true,
+        decoration: InputDecoration(
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: BorderSide.none,
           ),
-          //Variable que recibirá el correo
-          onChanged: (value) {},
+          filled: true,
+          fillColor: Colors.grey[200],
+          prefixIcon: const Icon(Icons.lock),
+          hintText: 'password',
+          labelText: 'Contraseña',
         ),
-      );
-    });
+        //Variable que recibirá el correo
+        onChanged: (value) {},
+      ),
+    );
   }
 
   Widget _buttonLogin() {
-    return StreamBuilder(
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        return ElevatedButton(
-          child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 100.0, vertical: 25.0),
-            child: const Text('Iniciar sesión'),
-          ),
-          style: ElevatedButton.styleFrom(
-            primary: const Color.fromRGBO(245, 71, 72, 1),
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          onPressed: () {
-            _getData();
-            if (name.text.isNotEmpty && pass.text.isNotEmpty) {
-              for (var x = 0; x < arrData.length; x++) {
-                if (name.text == arrData[x]['correo'].toString() && pass.text == arrData[x]['password'].toString()) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => HomePage(
-                              name: arrData[x]['nombre'],
-                              correo: arrData[x]['correo'])));
-                  break;
-                }
-              }
-              if (usuario == false) {
-                showAlertDialog(context);
-              }
-            } else {
-              showAlertDialogTextEmpty(context);
+    return ElevatedButton(
+      key: const Key("verifyUser"),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 25.0),
+        child: const Text('Iniciar sesión'),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: const Color.fromRGBO(245, 71, 72, 1),
+        textStyle: const TextStyle(
+          fontWeight: FontWeight.w800,
+        ),
+      ),
+      onPressed: () {
+        _getData();
+        if (name.text.isNotEmpty && pass.text.isNotEmpty) {
+          for (var x = 0; x < arrData.length; x++) {
+            if (name.text == arrData[x]['correo'].toString() &&
+                pass.text == arrData[x]['password'].toString()) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage(
+                          name: arrData[x]['nombre'],
+                          correo: arrData[x]['correo'])));
+              break;
             }
-          },
-        );
+          }
+          if (usuario == false) {
+            showAlertDialog(context);
+          }
+        } else {
+          showAlertDialogTextEmpty(context);
+        }
       },
     );
   }

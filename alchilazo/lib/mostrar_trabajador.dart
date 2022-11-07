@@ -7,8 +7,9 @@ import 'MongoDbModel_Worker.dart';
 import 'mongo.dart';
 
 class ViewWorker extends StatefulWidget {
-  const ViewWorker({Key? key, required this.trabajo}) : super(key: key);
+  const ViewWorker({Key? key, required this.trabajo, required this.correo}) : super(key: key);
   final String trabajo;
+  final String correo;
 
   @override
   State<ViewWorker> createState() => _ServicesWorkers();
@@ -21,25 +22,25 @@ class _ServicesWorkers extends State<ViewWorker> {
   Future _getData() async {
     arrData = await MongoDatabase.getData_workers();
     setState(() {});
-    for(int i = 0; i < arrData.length; i++){
-        for(int j = 0; j < arrData[i]["lista_trabajos"].length; j++){
-          if(arrData[i]["lista_trabajos"][j] == widget.trabajo){
-            trabajadores.add(arrData[i]);
-          }
+    for (int i = 0; i < arrData.length; i++) {
+      for (int j = 0; j < arrData[i]["lista_trabajos"].length; j++) {
+        if (arrData[i]["lista_trabajos"][j] == widget.trabajo) {
+          trabajadores.add(arrData[i]);
         }
       }
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _getData();
     });
   }
 
   final String imageUrl =
-  "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
+      "https://www.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png";
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class _ServicesWorkers extends State<ViewWorker> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Trabajadores"),
-          backgroundColor: Color.fromRGBO(248, 216, 74, 1),
+          backgroundColor: Color.fromRGBO(245, 71, 72, 1),
         ),
         backgroundColor: Colors.white,
         body: ListView.builder(
@@ -105,11 +106,12 @@ class _ServicesWorkers extends State<ViewWorker> {
         ),
       ),
       onTap: () {
+        
         Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: ((context) => Contratar(
-              info_trabajador: trabajadores[index]))));
+            context,
+            MaterialPageRoute(
+                builder: ((context) =>
+                    Contratar(info_trabajador: trabajadores[index]))));
       },
     );
   }

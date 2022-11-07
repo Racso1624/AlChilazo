@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 80.0,
               ),
               Image.asset(
-                './images/logo-chile.png',
+                'images/logo-chile.png',
                 height: 250.0,
               ),
               const SizedBox(
@@ -44,46 +44,42 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _bottonLogin() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return ElevatedButton(
-          child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 92.0, vertical: 28.0),
-            child: const Text('Iniciar Sesión'),
+    return ElevatedButton(
+        key: const Key("loginbutton"),
+        child: Container(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 100.0, vertical: 28.0),
+          child: const Text('Iniciar Sesión'),
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: const Color.fromRGBO(245, 71, 72, 1),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w800,
           ),
-          style: ElevatedButton.styleFrom(
-            primary: const Color.fromRGBO(245, 71, 72, 1),
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Ingreso()));
-          });
-    });
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Ingreso()));
+        });
   }
 
   Widget _buttonRegister() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return ElevatedButton(
-          child: Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 100.0, vertical: 28.0),
-            child: const Text('Registrarse'),
+    return ElevatedButton(
+        key: const Key("registerbutton"),
+        child: Container(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 100.0, vertical: 28.0),
+          child: const Text('Registrarse'),
+        ),
+        style: ElevatedButton.styleFrom(
+          primary: const Color.fromRGBO(245, 71, 72, 1),
+          textStyle: const TextStyle(
+            fontWeight: FontWeight.w800,
           ),
-          style: ElevatedButton.styleFrom(
-            primary: const Color.fromRGBO(245, 71, 72, 1),
-            textStyle: const TextStyle(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Registro()));
-          });
-    });
+        ),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Registro()));
+        });
   }
 }

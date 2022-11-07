@@ -1,17 +1,20 @@
 import 'dart:developer';
+import 'package:alchilazo/MongoDbModel_Order.dart';
 import 'package:alchilazo/MongoDbModel_User.dart';
 import 'package:alchilazo/MongoDbModel_Worker.dart';
 import 'package:alchilazo/constant.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
 class MongoDatabase {
-  static var db, userCollection, workerCollection;
+  static var db, userCollection, workerCollection, ordersCollection;
   static connect() async {
     db = await Db.create(MONGO_CONN_URL);
     await db.open();
     inspect(db);
     userCollection = db.collection(USER_COLLECTION);
     workerCollection = db.collection(WORKER_COLLECTION);
+    ordersCollection = db.collection(ORDERS_COLLECTION);
+    return true;
   }
 
   static Future<List<Map<String, dynamic>>> getData_users() async {
@@ -24,6 +27,11 @@ class MongoDatabase {
     return arrData;
   }
 
+  static Future<List<Map<String, dynamic>>> getData_Orders() async {
+    final arrData = await ordersCollection.find().toList();
+    return arrData;
+  }
+
   static Future<String> insert_usuario(MongoDbModel_User data) async {
     try {
       var result = await userCollection.insertOne(data.toJson());
@@ -33,8 +41,8 @@ class MongoDatabase {
         return "Algo ocurrio";
       }
     } catch (e) {
-      print(e.toString());
-      return e.toString();
+      print(e.toString()); // coverage:ignore-line
+      return e.toString(); // coverage:ignore-line
     }
   }
 
@@ -47,8 +55,23 @@ class MongoDatabase {
         return "Algo ocurrio";
       }
     } catch (e) {
-      print(e.toString());
-      return e.toString();
+      print(e.toString()); // coverage:ignore-line
+      return e.toString(); // coverage:ignore-line
     }
   }
+
+  static Future<String> insert_order(MongoDbModel_Order data) async {
+    try {
+      var result = await ordersCollection.insertOne(data.toJson());
+      if (result.isSuccess) {
+        return "Data insertada";
+      } else {
+        return "Algo ocurrio";
+      }
+    } catch (e) {
+      print(e.toString()); // coverage:ignore-line
+      return e.toString(); // coverage:ignore-line
+    }
+  }
+
 }

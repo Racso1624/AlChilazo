@@ -12,64 +12,63 @@ class Servicios_Trabajador extends StatefulWidget {
 
 class _ServiciosTrabajador extends State<Servicios_Trabajador> {
 
+  var lista_servicios = ["Servicio 1", "Servicio 2"];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-            child: Container(
-      constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height,
-          maxWidth: MediaQuery.of(context).size.width),
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Color.fromRGBO(245, 71, 72, 1),
-          Color.fromRGBO(245, 71, 72, 20)
-        ], begin: Alignment.topLeft, end: Alignment.centerRight),
+      appBar: AppBar(
+        title: Text("Sección de Trabajador"),
+        backgroundColor: Color.fromRGBO(245, 71, 72, 1),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 34.0, horizontal: 140.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Image.asset(
-                    './images/logo-chile.png',
-                    width: 150,
-                    height: 150,
-                  ),
-                ],
+      body: ListView(
+        padding:
+            EdgeInsets.only(top: 20.0, bottom: 10.0, left: 10.0, right: 10.0),
+        children: <Widget>[
+          Text(
+            'Servicios Solicitados',
+            style: TextStyle(
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Text(
+              '\nDescripción:',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.normal,
               ),
             ),
           ),
-          Expanded(
-            flex: 5,
-            child: Container(
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(40),
-                  topRight: Radius.circular(40),
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                ),
-              ),
+          Container(
+            margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+            height: 90,
+            child: ListView.separated(
+              shrinkWrap: true,
+              itemCount: lista_servicios.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  child: Center(
+                      child: Text(
+                    lista_servicios[index],
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
+                    ),
+                  )),
+                );
+              },
+              separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(),
+            ),
+            decoration: new BoxDecoration(
+              color: Color.fromARGB(255, 255, 79, 66),
             ),
           ),
         ],
       ),
-    )));
+    );
   }
 }

@@ -1,10 +1,16 @@
 import 'package:alchilazo/mongo.dart';
+import 'package:alchilazo/pantalla_home.dart';
 import 'package:alchilazo/services_screen.dart';
+import 'package:flutter/foundation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:flutter/material.dart';
 import 'MongoDbModel_Worker.dart';
+import 'dart:async';
+import 'package:location/location.dart';
 
 var lista_trabajos = [];
+var lati, long = 0.0;
 
 class RegisterWorker extends StatefulWidget {
   const RegisterWorker({Key? key, required this.name, required this.correo})
@@ -39,16 +45,19 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   ) async {
     var _id = M.ObjectId();
     final data = MongoDbModel_Worker(
-        id: _id,
-        name: name,
-        address: address,
-        phone: phone,
-        email: email,
-        descripcion: descripcion,
-        foto_dpi: foto_dpi,
-        antecedente_penal: antecedente_penal,
-        foto_perfil: foto_perfil,
-        lista_trabajos: lista_trabajos);
+      id: _id,
+      name: name,
+      address: address,
+      phone: phone,
+      email: email,
+      descripcion: descripcion,
+      foto_dpi: foto_dpi,
+      antecedente_penal: antecedente_penal,
+      foto_perfil: foto_perfil,
+      lista_trabajos: lista_trabajos,
+      latitud: lati,
+      longitud: long,
+    );
     var result = await MongoDatabase.insert_worker(data);
     _clearAll();
   }
@@ -65,6 +74,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("dirrecion"),
                   controller: address,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -74,6 +84,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("phone"),
                   controller: phone,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -83,6 +94,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("description"),
                   controller: descripcion,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -101,6 +113,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             content: Column(
               children: [
                 TextField(
+                  key: const Key("perfil"),
                   controller: foto_perfil,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Foto perfil'),
@@ -109,6 +122,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("antecedentes"),
                   controller: antecedente_penal,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -118,6 +132,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   height: 8,
                 ),
                 TextField(
+                  key: const Key("dpiPhoto"),
                   controller: foto_dpi,
                   decoration: const InputDecoration(
                       border: OutlineInputBorder(), labelText: 'Foto DPI'),
@@ -169,8 +184,21 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
               ],
             )),
         Step(
+          state: _activeStepIndex <= 3 ? StepState.editing : StepState.complete,
+          isActive: _activeStepIndex >= 3,
+          title: const Text('Ubicacion'),
+          content: Center(
+            child: Container(
+              width: 400.0,
+              height: 500.0,
+              padding: const EdgeInsets.all(20.0),
+              child: MapScreen(),
+            ),
+          ),
+        ),
+        Step(
             state: StepState.complete,
-            isActive: _activeStepIndex >= 3,
+            isActive: _activeStepIndex >= 4,
             title: const Text('Confirmar'),
             content: Container(
               child: Column(
@@ -182,7 +210,9 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                   Text('Descripcion: ${descripcion.text}'),
                   Text('Foto_perfil: ${foto_perfil.text}'),
                   Text('Foto Antecedente penales: ${antecedente_penal.text}'),
-                  Text('Foto DPI: ${foto_dpi.text}')
+                  Text('Foto DPI: ${foto_dpi.text}'),
+                  Text('latitud: $lati'),
+                  Text('longitud: $long'),
                 ],
               ),
             ))
@@ -192,11 +222,10 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(
-          child: Text('Registro Trabajador'),
-        ),
-        backgroundColor: Color.fromRGBO(245, 71, 72, 1)
-      ),
+          title: const Center(
+            child: Text('Registro Trabajador'),
+          ),
+          backgroundColor: Color.fromRGBO(245, 71, 72, 1)),
       body: Stepper(
         type: StepperType.horizontal,
         currentStep: _activeStepIndex,
@@ -214,6 +243,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 foto_dpi.text,
                 antecedente_penal.text,
                 foto_perfil.text);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: widget.name, correo: widget.correo)));
           }
           setState(() {});
         },
@@ -223,6 +253,21 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
           }
           _activeStepIndex -= 1;
           setState(() {});
+        },
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return Row(
+            children: <Widget>[
+              ElevatedButton(
+                key: const Key("continue"),
+                onPressed: details.onStepContinue,
+                child: const Text("Continue"),
+              ),
+              ElevatedButton(
+                onPressed: details.onStepCancel,
+                child: const Text("Cancel"),
+              ),
+            ],
+          );
         },
       ),
     );
@@ -300,5 +345,79 @@ class Card extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class MapScreen extends StatefulWidget {
+  @override
+  _MapScreenState createState() => _MapScreenState();
+}
+
+class _MapScreenState extends State<MapScreen> {
+  // GoogleMapController? mapController; //contrller for Google map
+  Set<Marker> markers = Set(); //markers for google map
+
+  LatLng showLocation = LatLng(14.569500, -90.559613);
+  late GoogleMapController _controller;
+  Location _location = Location();
+
+  void _onMapCreated(GoogleMapController _cntlr) {
+    _controller = _cntlr;
+    _location.onLocationChanged.listen((l) {
+      _controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(
+              target: LatLng(lati = l.latitude!, long = l.longitude!),
+              zoom: 15),
+        ),
+      );
+    });
+  }
+
+  @override
+  void initState() {
+    markers.add(Marker(
+      //add marker on google map para mostrar posiciones que ya esten en la base de datos
+      markerId: MarkerId(showLocation.toString()),
+      position: showLocation, //position of marker
+      infoWindow: InfoWindow(
+        //popup info
+        title: 'My Custom Title ',
+        snippet: 'My Custom Subtitle',
+      ),
+      icon: BitmapDescriptor.defaultMarker, //Icon for Marker
+    ));
+
+    //you can add more markers here
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Localizacion"),
+          backgroundColor: Colors.deepPurpleAccent,
+        ),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
+          child: Stack(
+            children: [
+              GoogleMap(
+                //Map widget from google_maps_flutter package
+                zoomGesturesEnabled: true, //enable Zoom in, out on map
+                initialCameraPosition: CameraPosition(
+                  //innital position in map
+                  target: showLocation, //initial position
+                ),
+                markers: markers, //markers to show on map
+                mapType: MapType.normal, //map type
+                onMapCreated: _onMapCreated,
+                myLocationEnabled: true,
+              ),
+            ],
+          ),
+        ));
   }
 }
