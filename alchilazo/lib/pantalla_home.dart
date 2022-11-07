@@ -70,23 +70,25 @@ class _HomePage extends State<HomePage> {
             key: const Key("WorkerRegister"),
             child: Text('Registrarme como trabajador'),
             onPressed: () {
-              print(usuario_existentes);
+              var trabajador_existe = null;
               for (var i = 0; i < usuario_existentes.length; i++) {
                 print(usuario_existentes[i]);
-                if (widget.correo == usuario_existentes[i]) {
+                if(widget.correo == usuario_existentes[i]){
+                  trabajador_existe = widget.correo;
+                }
+              }
+              if (trabajador_existe != null) {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => Servicios_Trabajador()));
-                  break;
-                } else {
+              } 
+              else{
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => RegisterWorker(
                               name: widget.name, correo: widget.correo)));
-                  break;
-                }
               }
             },
             style: ElevatedButton.styleFrom(

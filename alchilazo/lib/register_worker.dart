@@ -1,4 +1,5 @@
 import 'package:alchilazo/mongo.dart';
+import 'package:alchilazo/pantalla_home.dart';
 import 'package:alchilazo/services_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -244,6 +245,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 foto_perfil.text);
           }
           setState(() {});
+          Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: widget.name, correo: widget.correo)));
         },
         onStepCancel: () {
           if (_activeStepIndex == 0) {

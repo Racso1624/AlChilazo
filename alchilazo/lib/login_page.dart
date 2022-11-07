@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Container(
           padding:
               const EdgeInsets.symmetric(horizontal: 100.0, vertical: 28.0),
-          child: const Text('Registrarse'),
+          child: const Text('Iniciar Sesión'),
         ),
         style: ElevatedButton.styleFrom(
           primary: const Color.fromRGBO(245, 71, 72, 1),
