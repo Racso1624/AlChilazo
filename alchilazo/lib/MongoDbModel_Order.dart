@@ -11,6 +11,7 @@ String mongoDbModelToJson(MongoDbModel_Order data) => // coverage:ignore-line
 class MongoDbModel_Order { 
   MongoDbModel_Order({
     required this.id,
+    required this.worker_id,
     required this.title,
     required this.description,
     required this.latitud,
@@ -18,6 +19,7 @@ class MongoDbModel_Order {
   });
 
   ObjectId id;
+  ObjectId worker_id;
   String title;
   String description;
   double latitud;
@@ -26,6 +28,7 @@ class MongoDbModel_Order {
   factory MongoDbModel_Order.fromJson(Map<String, dynamic> json) => // coverage:ignore-line
       MongoDbModel_Order( // coverage:ignore-line
         id: json["_id"], // coverage:ignore-line
+        worker_id: json["worker_id"],
         title: json["title"], // coverage:ignore-line
         description: json["description"], // coverage:ignore-line
         latitud: json["latitud"], // coverage:ignore-line
@@ -34,6 +37,7 @@ class MongoDbModel_Order {
 
   Map<String, dynamic> toJson() => {
         "_id": id,
+        "worker_id": worker_id,
         "name": title,
         "address": description,
         "latitud": latitud,
