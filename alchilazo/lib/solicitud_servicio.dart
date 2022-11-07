@@ -83,20 +83,10 @@ class _Solicitud extends State<Solicitud> {
             ),
           ),
           _descriptionTextField(),
-          Align(
-            alignment: Alignment.center,
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(primary: Colors.red),
-              child: Text(
-                'Contratar',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-            ),
+          const SizedBox(
+            height: 20,
           ),
+          _buttonOrder()
         ],
       ),
     );

@@ -4,8 +4,9 @@ import 'contratar.dart';
 import 'package:alchilazo/mongo.dart';
 
 class ServicesScreen extends StatefulWidget {
-  const ServicesScreen({Key? key}) : super(key: key);
+  const ServicesScreen({Key? key, required this.correo}) : super(key: key);
 
+  final String correo;
   @override
   State<ServicesScreen> createState() => _ServicesScreenState();
 }
@@ -249,7 +250,9 @@ class Card extends StatelessWidget {
   final String text;
   final String imageUrl;
   final String subtitle;
+  var correo;
 
+  //ARREGLAR CORREO USUARIO
   Card(this.text, this.imageUrl, this.subtitle, {Key? key}) : super(key: key);
 
   @override
@@ -262,7 +265,7 @@ class Card extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: ((context) => ViewWorker(
-                        trabajo: text,
+                        trabajo: text, correo: correo,
                       ))));
         },
         child: Container(

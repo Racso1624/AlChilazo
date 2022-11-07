@@ -7,8 +7,9 @@ import 'MongoDbModel_Worker.dart';
 import 'mongo.dart';
 
 class ViewWorker extends StatefulWidget {
-  const ViewWorker({Key? key, required this.trabajo}) : super(key: key);
+  const ViewWorker({Key? key, required this.trabajo, required this.correo}) : super(key: key);
   final String trabajo;
+  final String correo;
 
   @override
   State<ViewWorker> createState() => _ServicesWorkers();

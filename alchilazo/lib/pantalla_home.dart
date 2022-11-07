@@ -144,7 +144,7 @@ class _HomePage extends State<HomePage> {
             child: Text('Buscar Servicios'),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ServicesScreen()));
+                  MaterialPageRoute(builder: (context) => ServicesScreen(correo: widget.correo)));
             },
             style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 255, 79, 66),
