@@ -14,6 +14,9 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+    # use the google/dart container (this makes `dart` available to use)
+    container:
+      image: google/dart:latest
     steps:
       - name: Setup Repository
         uses: actions/checkout@v2
