@@ -148,6 +148,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
             isActive: _activeStepIndex >= 2,
             title: const Text('Elegir Servicios Para Trabajar'),
             content: Column(
+              key: const Key("trabajos"),
               children: [
                 Card(
                     "Electricista",
@@ -233,6 +234,7 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
         onStepContinue: () {
           if (_activeStepIndex < (stepList().length - 1)) {
             _activeStepIndex += 1;
+            setState(() {});
           } else {
             _insertData(
                 widget.name,
@@ -243,9 +245,12 @@ class _MyRegisterWorkerState extends State<RegisterWorker> {
                 foto_dpi.text,
                 antecedente_penal.text,
                 foto_perfil.text);
-            Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(name: widget.name, correo: widget.correo)));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        HomePage(name: widget.name, correo: widget.correo)));
           }
-          setState(() {});
         },
         onStepCancel: () {
           if (_activeStepIndex == 0) {
