@@ -4,18 +4,18 @@ import 'package:alchilazo/services_screen.dart';
 import 'package:alchilazo/worker_services.dart';
 import 'package:flutter/material.dart';
 
-class HomePage_material extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(
-        correo: 'par20117@uvg.edu.gt',
-        name: 'yong',
-      ),
-    );
-  }
-}
+// class HomePage_material extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: HomePage(
+//         correo: 'par20117@uvg.edu.gt',
+//         name: 'yong',
+//       ),
+//     );
+//   }
+// }
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.name, required this.correo})
@@ -73,22 +73,21 @@ class _HomePage extends State<HomePage> {
               var trabajador_existe = null;
               for (var i = 0; i < usuario_existentes.length; i++) {
                 print(usuario_existentes[i]);
-                if(widget.correo == usuario_existentes[i]){
+                if (widget.correo == usuario_existentes[i]) {
                   trabajador_existe = widget.correo;
                 }
               }
               if (trabajador_existe != null) {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Servicios_Trabajador()));
-              } 
-              else{
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => RegisterWorker(
-                              name: widget.name, correo: widget.correo)));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Servicios_Trabajador()));
+              } else {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => RegisterWorker(
+                            name: widget.name, correo: widget.correo)));
               }
             },
             style: ElevatedButton.styleFrom(
@@ -143,8 +142,11 @@ class _HomePage extends State<HomePage> {
             key: const Key("SearchService"),
             child: Text('Buscar Servicios'),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ServicesScreen(correo: widget.correo)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ServicesScreen(correo: widget.correo)));
             },
             style: ElevatedButton.styleFrom(
                 primary: Color.fromARGB(255, 255, 79, 66),
