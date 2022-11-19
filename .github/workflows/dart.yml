@@ -10,8 +10,8 @@ jobs:
     runs-on: macos-latest
     strategy:
       matrix:
-        api-level: [29]
-        target: [playstore]
+        api-level: [21, 23, 29]
+        target: [default, google_apis]
     steps:
       - uses: actions/checkout@v2
       - uses: subosito/flutter-action@v1
@@ -28,11 +28,3 @@ jobs:
           arch: x86_64
           profile: Nexus 6
           script: flutter drive --target=test_driver/app.dart
-
-      # Update screenshot to artifact
-      - name: Upload screenshots
-        if: always()
-        uses: actions/upload-artifact@v1
-        with:
-          name: screenshot
-          path: ${{ matrix.path }}screenshots/
