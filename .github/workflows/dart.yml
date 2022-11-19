@@ -1,22 +1,38 @@
-on: push
-name: Test, Build and Release apk
+on:
+  push:
+    tags-ignore:
+      - '**'
+    branches:
+      - '**'
+name: Flutter integration test
 jobs:
-  build:
-    name: Build APK
-    runs-on: ubuntu-latest
+  drive_android:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [29]
+        target: [playstore]
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-java@v1
-      with:
-        java-version: '12.x'
-    - uses: subosito/flutter-action@v1
-      with:
-        flutter-version: '1.7.8+hotfix.4'
-    - run: flutter pub get
-    - run: flutter drive --target=test_driver/app.dart
-    - run: flutter build apk --debug --split-per-abi
-    - name: Push APK to Releases
-      uses: ncipollo/release-action@v1
-      with:
-        artifacts: "build/app/outputs/apk/debug/*.apk"
-        token: ${{ secrets.TOKEN }}
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.8.1'
+          channel: 'stable'
+
+      # Run integration test
+      - name: Run Flutter Driver tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          target: ${{ matrix.target }}
+          api-level: ${{ matrix.api-level }}
+          arch: x86_64
+          profile: Nexus 6
+          script: flutter drive --target=test_driver/app.dart
+
+      # Update screenshot to artifact
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v1
+        with:
+          name: screenshot
+          path: ${{ matrix.path }}screenshots/
