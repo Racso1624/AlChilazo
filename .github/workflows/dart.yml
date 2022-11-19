@@ -12,7 +12,6 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         flutter-version: '1.7.8+hotfix.4'
-    - run: flutter pub get
     - run: flutter drive --target=test_driver/app.dart
     - run: flutter build apk --debug --split-per-abi
     - name: Push APK to Releases
