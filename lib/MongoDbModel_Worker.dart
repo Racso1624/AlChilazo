@@ -8,20 +8,20 @@ MongoDbModel_Worker mongoDbModelFromJson(String str) => // coverage:ignore-line
 String mongoDbModelToJson(MongoDbModel_Worker data) => // coverage:ignore-line
     json.encode(data.toJson()); // coverage:ignore-line
 
-class MongoDbModel_Worker { 
+class MongoDbModel_Worker {
   MongoDbModel_Worker({
-    required this.id,
-    required this.name,
-    required this.address,
-    required this.phone,
-    required this.email,
-    required this.descripcion,
-    required this.foto_dpi,
-    required this.antecedente_penal,
-    required this.foto_perfil,
-    required this.lista_trabajos,
-    required this.latitud,
-    required this.longitud,
+    this.id,
+    this.name,
+    this.address,
+    this.phone,
+    this.email,
+    this.descripcion,
+    this.foto_dpi,
+    this.antecedente_penal,
+    this.foto_perfil,
+    this.lista_trabajos,
+    this.latitud,
+    this.longitud,
   });
 
   ObjectId id;
@@ -37,8 +37,10 @@ class MongoDbModel_Worker {
   double latitud;
   double longitud;
 
-  factory MongoDbModel_Worker.fromJson(Map<String, dynamic> json) => // coverage:ignore-line
-      MongoDbModel_Worker( // coverage:ignore-line
+  factory MongoDbModel_Worker.fromJson(
+          Map<String, dynamic> json) => // coverage:ignore-line
+      MongoDbModel_Worker(
+        // coverage:ignore-line
         id: json["_id"], // coverage:ignore-line
         name: json["name"], // coverage:ignore-line
         address: json["address"], // coverage:ignore-line

@@ -12,7 +12,7 @@ void main() {
       final verifybutton = find.byValueKey("verifyUser");
       final searchService = find.byValueKey("SearchService");
 
-      late FlutterDriver driver;
+      FlutterDriver driver;
 
       //conectarlo al flutter driver antes de realizar las pruebas
       setUpAll(() async {

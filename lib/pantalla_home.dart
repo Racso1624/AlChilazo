@@ -18,8 +18,7 @@ import 'package:flutter/material.dart';
 // }
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key, required this.name, required this.correo})
-      : super(key: key);
+  const HomePage({Key key, this.name, this.correo}) : super(key: key);
   @override
   final String name;
   final String correo;

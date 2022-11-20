@@ -9,7 +9,7 @@ double lati = 0.0;
 double long = 0.0;
 
 class Contratar extends StatefulWidget {
-  const Contratar({Key? key, required this.info_trabajador}) : super(key: key);
+  const Contratar({Key key, this.info_trabajador}) : super(key: key);
   final info_trabajador;
 
   @override
@@ -119,9 +119,11 @@ class _Contratar extends State<Contratar> {
             alignment: Alignment.center,
             child: ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(
-                builder: ((context) =>
-                    Solicitud(info_trabajador: widget.info_trabajador))));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: ((context) => Solicitud(
+                            info_trabajador: widget.info_trabajador))));
               },
               style: ElevatedButton.styleFrom(primary: Colors.red),
               child: Text(
@@ -149,7 +151,7 @@ class _MapScreenState extends State<MapScreen> {
   Set<Marker> markers = Set(); //markers for google map
 
   LatLng showLocation = LatLng(lati, long);
-  late GoogleMapController _controller;
+  GoogleMapController _controller;
   Location _location = Location();
 
   void _onMapCreated(GoogleMapController _cntlr) {
@@ -159,8 +161,8 @@ class _MapScreenState extends State<MapScreen> {
         CameraUpdate.newCameraPosition(
           CameraPosition(
               target: LatLng(
-                l.latitude!,
-                l.longitude!,
+                l.latitude,
+                l.longitude,
               ),
               zoom: 15),
         ),

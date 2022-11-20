@@ -13,8 +13,7 @@ var lista_trabajos = [];
 var lati, long = 0.0;
 
 class RegisterWorker extends StatefulWidget {
-  const RegisterWorker({Key? key, required this.name, required this.correo})
-      : super(key: key);
+  const RegisterWorker({Key key, this.name, this.correo}) : super(key: key);
   final String name;
   final String correo;
 
@@ -293,7 +292,7 @@ class Card extends StatelessWidget {
   final String imageUrl;
   final String subtitle;
 
-  Card(this.text, this.imageUrl, this.subtitle, {Key? key}) : super(key: key);
+  Card(this.text, this.imageUrl, this.subtitle, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -362,8 +361,8 @@ class _MapScreenState extends State<MapScreen> {
   // GoogleMapController? mapController; //contrller for Google map
   Set<Marker> markers = Set(); //markers for google map
 
-  LatLng showLocation = LatLng(14.569500, -90.559613);
-  late GoogleMapController _controller;
+  LatLng showLocation = const LatLng(14.569500, -90.559613);
+  GoogleMapController _controller;
   Location _location = Location();
 
   void _onMapCreated(GoogleMapController _cntlr) {
@@ -372,8 +371,7 @@ class _MapScreenState extends State<MapScreen> {
       _controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(
-              target: LatLng(lati = l.latitude!, long = l.longitude!),
-              zoom: 15),
+              target: LatLng(lati = l.latitude, long = l.longitude), zoom: 15),
         ),
       );
     });

@@ -4,7 +4,7 @@ import 'contratar.dart';
 import 'package:alchilazo/mongo.dart';
 
 class ServicesScreen extends StatefulWidget {
-  const ServicesScreen({Key? key, required this.correo}) : super(key: key);
+  const ServicesScreen({Key key, this.correo}) : super(key: key);
 
   final String correo;
   @override
@@ -40,7 +40,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
 }
 
 class TopBar extends StatelessWidget {
-  const TopBar({Key? key}) : super(key: key);
+  const TopBar({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class TopBar extends StatelessWidget {
 }
 
 class SearchInput extends StatelessWidget {
-  const SearchInput({Key? key}) : super(key: key);
+  const SearchInput({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,7 @@ class SearchInput extends StatelessWidget {
 }
 
 class HeadlineRecommendation extends StatelessWidget {
-  const HeadlineRecommendation({Key? key}) : super(key: key);
+  const HeadlineRecommendation({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +145,7 @@ class HeadlineRecommendation extends StatelessWidget {
 }
 
 class PromoCard extends StatelessWidget {
-  const PromoCard({Key? key}) : super(key: key);
+  const PromoCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -167,7 +167,7 @@ class PromoCard extends StatelessWidget {
 }
 
 class Headline extends StatelessWidget {
-  const Headline({Key? key}) : super(key: key);
+  const Headline({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +195,7 @@ class Headline extends StatelessWidget {
 }
 
 class CardListView extends StatelessWidget {
-  const CardListView({Key? key}) : super(key: key);
+  const CardListView({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -253,7 +253,7 @@ class Card extends StatelessWidget {
   var correo;
 
   //ARREGLAR CORREO USUARIO
-  Card(this.text, this.imageUrl, this.subtitle, {Key? key}) : super(key: key);
+  Card(this.text, this.imageUrl, this.subtitle, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -265,7 +265,8 @@ class Card extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: ((context) => ViewWorker(
-                        trabajo: text, correo: correo,
+                        trabajo: text,
+                        correo: correo,
                       ))));
         },
         child: Container(

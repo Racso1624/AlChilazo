@@ -7,7 +7,7 @@ import 'MongoDbModel_Worker.dart';
 import 'mongo.dart';
 
 class ViewWorker extends StatefulWidget {
-  const ViewWorker({Key? key, required this.trabajo, required this.correo}) : super(key: key);
+  const ViewWorker({Key key, this.trabajo, this.correo}) : super(key: key);
   final String trabajo;
   final String correo;
 
@@ -106,7 +106,6 @@ class _ServicesWorkers extends State<ViewWorker> {
         ),
       ),
       onTap: () {
-        
         Navigator.push(
             context,
             MaterialPageRoute(
