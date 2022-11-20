@@ -1,5 +1,5 @@
 name: alchilazo system testing
-on: [push, pull_request]
+on: [push]
 jobs:
   system_test:
     runs-on: windows-latest
