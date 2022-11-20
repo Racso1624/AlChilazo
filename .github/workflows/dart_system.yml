@@ -8,6 +8,4 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable'
-    - run: |
-           flutter config --enable-windows-desktop
-           flutter test -d windows test/mongo_test.dart
+    - run: 'flutter drive --target=test_driver/app.dart'
