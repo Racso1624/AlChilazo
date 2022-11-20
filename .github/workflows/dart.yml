@@ -1,5 +1,5 @@
 name: alchilazo unit testing
-on: [push, pull_request]
+on: [push]
 jobs:
   unit_test:
     runs-on: windows-latest
