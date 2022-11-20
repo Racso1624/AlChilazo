@@ -8,9 +8,8 @@ import 'package:mongo_dart/mongo_dart.dart' as M;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-
 class Solicitud extends StatefulWidget {
-  const Solicitud({Key? key, required this.info_trabajador}) : super(key: key);
+  const Solicitud({Key key, this.info_trabajador}) : super(key: key);
   final info_trabajador;
 
   @override
@@ -18,7 +17,6 @@ class Solicitud extends StatefulWidget {
 }
 
 class _Solicitud extends State<Solicitud> {
-
   var titulo = TextEditingController();
   var descripcion = TextEditingController();
   var arrData = [];
@@ -33,7 +31,12 @@ class _Solicitud extends State<Solicitud> {
   Future<void> _insertData(String title, String description) async {
     var _id = M.ObjectId();
     final data = MongoDbModel_Order(
-        id: _id, worker_id: widget.info_trabajador["_id"],title: title, description: description, latitud: latitud, longitud: longitud);
+        id: _id,
+        worker_id: widget.info_trabajador["_id"],
+        title: title,
+        description: description,
+        latitud: latitud,
+        longitud: longitud);
     var result = await MongoDatabase.insert_order(data);
   }
 
@@ -162,20 +165,20 @@ class _Solicitud extends State<Solicitud> {
         ),
       ),
       onPressed: () {
-        if (titulo.text.isNotEmpty && descripcion.text.isNotEmpty){
-              _insertData(titulo.text, descripcion.text);
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) => HomePage(
-              //       name: name.text,
-              //       correo: email.text,
-              //     ),
-              //   ),
-              // );
-          } else {
-            showAlertDialogTextEmpty(context);
-          }
+        if (titulo.text.isNotEmpty && descripcion.text.isNotEmpty) {
+          _insertData(titulo.text, descripcion.text);
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //     builder: (context) => HomePage(
+          //       name: name.text,
+          //       correo: email.text,
+          //     ),
+          //   ),
+          // );
+        } else {
+          showAlertDialogTextEmpty(context);
+        }
       },
     );
   }
@@ -208,6 +211,4 @@ class _Solicitud extends State<Solicitud> {
       },
     );
   }
-
 }
-
