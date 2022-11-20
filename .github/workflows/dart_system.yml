@@ -1,5 +1,5 @@
 name: alchilazo system testing
-on: [push, pull_request]
+on: [push]
 jobs:
   system_test:
     runs-on: windows-latest
@@ -8,4 +8,4 @@ jobs:
     - uses: subosito/flutter-action@v1
       with:
         channel: 'stable'
-    - run: 'flutter drive -d all'
+    - run: 'flutter drive -d Windows'
