@@ -1,7 +1,7 @@
 name: alchilazo system testing
 on: [push, pull_request]
 jobs:
-  integration_test:
+  system_test:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
