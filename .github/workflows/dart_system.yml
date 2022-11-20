@@ -1,4 +1,4 @@
-name: alchilazo integration testing
+name: alchilazo system testing
 on: [push, pull_request]
 jobs:
   integration_test:
