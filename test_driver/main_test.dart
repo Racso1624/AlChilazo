@@ -49,6 +49,11 @@ void main() {
         await Future.delayed(const Duration(seconds: 2));
         driver.tap(searchService);
       });
+
+      test("Cerrar el test", () async {
+        await Future.delayed(const Duration(seconds: 2));
+        driver.close();
+      });
     },
   );
 
@@ -100,7 +105,12 @@ void main() {
   //     test("click en el boton para registrarse", () {
   //       driver.tap(newUserButton);
   //     });
-  //   },
+
+  //       test("Cerrar el test", () async {
+  //         await Future.delayed(const Duration(seconds: 2));
+  //         driver.close();
+  //       });
+  // //   },
   // );
 
   //tercer flujo
@@ -207,6 +217,11 @@ void main() {
   //       await Future.delayed(const Duration(seconds: 2));
   //       driver.tap(continueButton);
   //     });
+
+  //      test("Cerrar el test", () async {
+  //        await Future.delayed(const Duration(seconds: 2));
+  //        driver.close();
+  //      });
   //   },
   // );
 }
