@@ -8,14 +8,14 @@ MongoDbModel_Order mongoDbModelFromJson(String str) => // coverage:ignore-line
 String mongoDbModelToJson(MongoDbModel_Order data) => // coverage:ignore-line
     json.encode(data.toJson()); // coverage:ignore-line
 
-class MongoDbModel_Order { 
+class MongoDbModel_Order {
   MongoDbModel_Order({
-    required this.id,
-    required this.worker_id,
-    required this.title,
-    required this.description,
-    required this.latitud,
-    required this.longitud,
+    this.id,
+    this.worker_id,
+    this.title,
+    this.description,
+    this.latitud,
+    this.longitud,
   });
 
   ObjectId id;
@@ -25,8 +25,10 @@ class MongoDbModel_Order {
   double latitud;
   double longitud;
 
-  factory MongoDbModel_Order.fromJson(Map<String, dynamic> json) => // coverage:ignore-line
-      MongoDbModel_Order( // coverage:ignore-line
+  factory MongoDbModel_Order.fromJson(
+          Map<String, dynamic> json) => // coverage:ignore-line
+      MongoDbModel_Order(
+        // coverage:ignore-line
         id: json["_id"], // coverage:ignore-line
         worker_id: json["worker_id"],
         title: json["title"], // coverage:ignore-line
