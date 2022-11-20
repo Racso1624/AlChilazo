@@ -1,5 +1,5 @@
 name: alchilazo
-on: [push]
+on: [push, pull_request]
 jobs:
   drive:
     runs-on: windows-latest
@@ -11,3 +11,4 @@ jobs:
     - run: |
            flutter config --enable-windows-desktop
            flutter test -d windows test/mongo_test.dart
+           flutter drive --target=test_driver/app.dart
