@@ -1,4 +1,4 @@
-name: alchilazo
+name: alchilazo unit testing
 on: [push, pull_request]
 jobs:
   unit_test:
