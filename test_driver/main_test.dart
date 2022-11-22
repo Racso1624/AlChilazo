@@ -54,7 +54,7 @@ void main() {
 
       test("Cerrar el test", () async {
         await Future.delayed(const Duration(seconds: 2));
-        await driver.close();
+        driver.close();
       });
     },
   );
