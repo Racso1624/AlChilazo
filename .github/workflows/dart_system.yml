@@ -1,0 +1,11 @@
+name: alchilazo system testing
+on: [push]
+jobs:
+  system_test:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: 'stable'
+    - run: 'flutter drive -d Windows'

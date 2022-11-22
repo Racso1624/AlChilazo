@@ -22,6 +22,7 @@ void main() {
       //cerrar conexion al terminar las pruebas
       tearDownAll(() async {
         if (driver != null) {
+          // print("Shutting down");
           driver.screenshot();
         }
       });
@@ -32,15 +33,16 @@ void main() {
       });
 
       test("llenar datos para ingresar", () async {
-        await driver.tap(userlogin);
-        await driver.enterText("par20117@uvg.edu.gt");
-        await driver.waitFor(find.text('par20117@uvg.edu.gt'));
-        await driver.tap(passlogin);
-        await driver.enterText("123456");
         await Future.delayed(const Duration(seconds: 2));
+        await driver.tap(userlogin);
+        await driver.enterText("prueba@gmail.com");
+        await driver.waitFor(find.text('prueba@gmail.com'));
+        await driver.tap(passlogin);
+        await driver.enterText("123");
       });
 
-      test("Ingresar a la aplicacion", () {
+      test("Ingresar a la aplicacion", () async {
+        await Future.delayed(const Duration(seconds: 2));
         driver.tap(verifybutton);
         driver.tap(verifybutton);
       });
@@ -49,10 +51,15 @@ void main() {
         await Future.delayed(const Duration(seconds: 2));
         driver.tap(searchService);
       });
+
+      test("Cerrar el test", () async {
+        await Future.delayed(const Duration(seconds: 2));
+        driver.close();
+      });
     },
   );
 
-  //segundo flujo
+  // // segundo flujo
   // group(
   //   'Segundo flujo, Ingresar como un nuevo usuario',
   //   () {
@@ -63,7 +70,7 @@ void main() {
   //     final dpi = find.byValueKey("dpi");
   //     final newUserButton = find.byValueKey("newUser");
 
-  //     late FlutterDriver driver;
+  //     FlutterDriver driver;
 
   //     //conectarlo al flutter driver antes de realizar las pruebas
   //     setUpAll(() async {
@@ -100,10 +107,15 @@ void main() {
   //     test("click en el boton para registrarse", () {
   //       driver.tap(newUserButton);
   //     });
+
+  //     test("Cerrar el test", () async {
+  //       await Future.delayed(const Duration(seconds: 2));
+  //       driver.close();
+  //     });
   //   },
   // );
 
-  //tercer flujo
+  // // tercer flujo
   // group(
   //   'Tercer flujo, ingresar y registrarse como un nuevo trabajador',
   //   () {
@@ -121,7 +133,7 @@ void main() {
   //     final dpiPhoto = find.byValueKey("dpiPhoto");
   //     final continueButton = find.byValueKey("continue");
 
-  //     late FlutterDriver driver;
+  //     FlutterDriver driver;
 
   //     //conectarlo al flutter driver antes de realizar las pruebas
   //     setUpAll(() async {
@@ -206,6 +218,11 @@ void main() {
   //     test("Continue button press para el ultimo", () async {
   //       await Future.delayed(const Duration(seconds: 2));
   //       driver.tap(continueButton);
+  //     });
+
+  //     test("Cerrar el test", () async {
+  //       await Future.delayed(const Duration(seconds: 2));
+  //       driver.close();
   //     });
   //   },
   // );

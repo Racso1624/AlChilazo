@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart';
 import 'package:alchilazo/mongo.dart';
+import 'package:flutter_driver/driver_extension.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  enableFlutterDriverExtension();
+  runApp(MyApp());
+}
 
 void connectToMongo() async {
   WidgetsFlutterBinding.ensureInitialized();
