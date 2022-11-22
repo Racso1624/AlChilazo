@@ -22,6 +22,7 @@ void main() {
       //cerrar conexion al terminar las pruebas
       tearDownAll(() async {
         if (driver != null) {
+          // print("Shutting down");
           driver.screenshot();
         }
       });
@@ -32,16 +33,16 @@ void main() {
       });
 
       test("llenar datos para ingresar", () async {
+        await Future.delayed(const Duration(seconds: 2));
         await driver.tap(userlogin);
         await driver.enterText("par20117@uvg.edu.gt");
         await driver.waitFor(find.text('par20117@uvg.edu.gt'));
         await driver.tap(passlogin);
         await driver.enterText("123456");
-        await Future.delayed(const Duration(seconds: 2));
       });
 
-      test("Ingresar a la aplicacion", () {
-        driver.tap(verifybutton);
+      test("Ingresar a la aplicacion", () async {
+        await Future.delayed(const Duration(seconds: 2));
         driver.tap(verifybutton);
       });
 
@@ -52,7 +53,7 @@ void main() {
 
       test("Cerrar el test", () async {
         await Future.delayed(const Duration(seconds: 2));
-        driver.close();
+        await driver.close();
       });
     },
   );
