@@ -21,10 +21,11 @@ void main() {
 
       //cerrar conexion al terminar las pruebas
       tearDownAll(() async {
-        if (driver != null) {
-          // print("Shutting down");
-          driver.screenshot();
-        }
+        // if (driver != null) {
+        //   // print("Shutting down");
+        //   driver.screenshot();
+        // }
+        driver.close();
       });
 
       test("presionar login button", () async {
@@ -51,10 +52,10 @@ void main() {
         driver.tap(searchService);
       });
 
-      test("Cerrar el test", () async {
-        await Future.delayed(const Duration(seconds: 2));
-        await driver.close();
-      });
+      //   test("Cerrar el test", () async {
+      //     await Future.delayed(const Duration(seconds: 2));
+      //     await driver.close();
+      //   });
     },
   );
 
