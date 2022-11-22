@@ -253,6 +253,7 @@ class Card extends StatelessWidget {
   var correo;
 
   //ARREGLAR CORREO USUARIO
+  //Para la base de datos
   Card(this.text, this.imageUrl, this.subtitle, {Key key}) : super(key: key);
 
   @override
